@@ -13,11 +13,15 @@ Route::get('/',[PagesController::class, 'index']);
 Route::get('/viewproduct/{id}',[PagesController::class, 'viewProduct'])->name('viewproduct');
 Route::get('/categoryproducts/{catid}',[PagesController::class, 'categoryproducts'])->name('categoryproducts');
 Route::get('/search', [PagesController::class, 'search'])->name('search');
+Route::get('/search-suggestions', [PagesController::class, 'searchSuggestions'])->name('search.suggestions');
+Route::get('/about', [PagesController::class, 'about'])->name('about');
+Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
 
 Route::middleware('auth')->group(function(){
     Route::post('/cart/store', [CartController::class, 'store'])->name('cart.store');
     Route::get('/mycart', [CartController::class, 'mycart'])->name('mycart');
-    Route::get('/cart/{id}/delete', [CartController::class, 'destroy'])->name('cart.destroy');
+    Route::delete('/cart/{id}/delete', [CartController::class, 'destroy'])->name('cart.destroy');
+    Route::get('/cart/count', [CartController::class, 'getCartCount'])->name('cart.count');
     Route::get('/checkout/{cartid}', [PagesController::class, 'checkout'])->name('checkout');
     //order
     Route::post('/order/store', [OrderController::class, 'store'])->name('order.store');

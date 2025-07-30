@@ -44,5 +44,63 @@ class PagesController extends Controller
         $products = Product::where('name', 'like', '%' . $search . '%')->get();
         return view('search', compact('products'));
     }
+
+    public function searchSuggestions(Request $request)
+    {
+        $query = $request->input('query');
+        
+        if (strlen($query) < 2) {
+            return response()->json([]);
+        }
+
+        // Get product suggestions
+        $products = Product::where('name', 'like', '%' . $query . '%')
+            ->with('category')
+            ->take(6)
+            ->get();
+
+        // Get category suggestions
+        $categories = \App\Models\Category::where('name', 'like', '%' . $query . '%')
+            ->take(4)
+            ->get();
+
+        $suggestions = [];
+
+        // Add product suggestions
+        foreach ($products as $product) {
+            $suggestions[] = [
+                'type' => 'product',
+                'id' => $product->id,
+                'name' => $product->name,
+                'price' => $product->discounted_price ?: $product->price,
+                'original_price' => $product->price,
+                'image' => asset('images/products/' . $product->photopath),
+                'category' => $product->category->name ?? 'General',
+                'url' => route('viewproduct', $product->id)
+            ];
+        }
+
+        // Add category suggestions
+        foreach ($categories as $category) {
+            $suggestions[] = [
+                'type' => 'category',
+                'id' => $category->id,
+                'name' => $category->name,
+                'url' => route('categoryproducts', $category->id)
+            ];
+        }
+
+        return response()->json($suggestions);
+    }
+
+    public function about()
+    {
+        return view('about');
+    }
+
+    public function contact()
+    {
+        return view('contact');
+    }
             
-}    
+}
