@@ -229,14 +229,14 @@
                 <div class="text-center" data-aos="fade-up" data-aos-delay="100">
                     <div class="relative mb-6">
                         <div class="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-lg">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" 
+                            <img src="#" 
                                  alt="CEO" class="w-full h-full object-cover">
                         </div>
                         <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-primary-500 text-white px-3 py-1 rounded-full text-xs font-bold">
                             CEO
                         </div>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">John Smith</h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Sajan Parajuli</h3>
                     <p class="text-gray-600 mb-4">Chief Executive Officer</p>
                     <p class="text-sm text-gray-500">Leading with vision and passion for customer excellence.</p>
                 </div>
@@ -245,14 +245,14 @@
                 <div class="text-center" data-aos="fade-up" data-aos-delay="200">
                     <div class="relative mb-6">
                         <div class="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-lg">
-                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b47b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" 
+                            <img src="#" 
                                  alt="CTO" class="w-full h-full object-cover">
                         </div>
                         <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
                             CTO
                         </div>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Sarah Johnson</h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Aadar Khanal</h3>
                     <p class="text-gray-600 mb-4">Chief Technology Officer</p>
                     <p class="text-sm text-gray-500">Driving innovation and technical excellence.</p>
                 </div>
@@ -261,14 +261,14 @@
                 <div class="text-center" data-aos="fade-up" data-aos-delay="300">
                     <div class="relative mb-6">
                         <div class="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-lg">
-                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" 
+                            <img src="#" 
                                  alt="Head of Customer Success" class="w-full h-full object-cover">
                         </div>
                         <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-bold">
                             HEAD CS
                         </div>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Mike Davis</h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Sanish Nepali</h3>
                     <p class="text-gray-600 mb-4">Head of Customer Success</p>
                     <p class="text-sm text-gray-500">Ensuring every customer has an amazing experience.</p>
                 </div>
