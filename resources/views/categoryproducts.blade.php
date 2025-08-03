@@ -50,9 +50,9 @@
                                     alt="{{ $product->name }}"
                                     class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                                 
-                                <!-- Sale Badge with Animation -->
+                                <!-- Sale Badge -->
                                 @if ($product->discounted_price != '')
-                                    <div class="absolute top-4 left-4 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold uppercase tracking-wider px-3 py-2 rounded-full shadow-lg animate-bounce-slow">
+                                    <div class="absolute top-4 left-4 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold uppercase tracking-wider px-3 py-2 rounded-full shadow-lg">
                                         <i class="ri-fire-line mr-1"></i>SALE
                                     </div>
                                 @endif
@@ -77,9 +77,21 @@
                                                 <i class="ri-shopping-cart-2-line text-lg"></i>
                                             </button>
                                         </form>
-                                        <button class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-700 hover:bg-red-500 hover:text-white transition-all duration-300 transform hover:scale-110 shadow-lg">
-                                            <i class="ri-heart-line text-lg"></i>
-                                        </button>
+                                        @auth
+                                            <button onclick="toggleWishlist({{ $product->id }}, this)" 
+                                                    class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-700 hover:bg-red-500 hover:text-white transition-all duration-300 transform hover:scale-110 shadow-lg wishlist-btn"
+                                                    data-product-id="{{ $product->id }}">
+                                                @if(auth()->user()->wishlists->contains('product_id', $product->id))
+                                                    <i class="ri-heart-fill text-lg text-red-500"></i>
+                                                @else
+                                                    <i class="ri-heart-line text-lg"></i>
+                                                @endif
+                                            </button>
+                                        @else
+                                            <a href="{{ route('login') }}" class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-700 hover:bg-red-500 hover:text-white transition-all duration-300 transform hover:scale-110 shadow-lg">
+                                                <i class="ri-heart-line text-lg"></i>
+                                            </a>
+                                        @endauth
                                     </div>
                                 </div>
                                 
@@ -102,11 +114,22 @@
                                 <!-- Rating Stars -->
                                 <div class="flex items-center mb-4">
                                     <div class="flex text-yellow-400 mr-2">
+                                        @php $avgRating = $product->averageRating(); @endphp
                                         @for($i = 1; $i <= 5; $i++)
-                                            <i class="ri-star-fill text-sm"></i>
+                                            @if($i <= $avgRating)
+                                                <i class="ri-star-fill text-sm"></i>
+                                            @elseif($i - 0.5 <= $avgRating)
+                                                <i class="ri-star-half-fill text-sm"></i>
+                                            @else
+                                                <i class="ri-star-line text-sm"></i>
+                                            @endif
                                         @endfor
                                     </div>
-                                    <span class="text-xs text-gray-500 font-medium">(4.8) 127 reviews</span>
+                                    @if($product->totalReviews() > 0)
+                                        <span class="text-xs text-gray-500 font-medium">({{ number_format($avgRating, 1) }}) {{ $product->totalReviews() }} reviews</span>
+                                    @else
+                                        <span class="text-xs text-gray-500 font-medium">No reviews yet</span>
+                                    @endif
                                 </div>
                                 
                                 <!-- Price Section -->
@@ -155,4 +178,55 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Toggle wishlist function
+        function toggleWishlist(productId, button) {
+            const icon = button.querySelector('i');
+            const isInWishlist = icon.classList.contains('ri-heart-fill');
+            
+            const url = isInWishlist ? `/wishlist/${productId}` : '/wishlist';
+            const method = isInWishlist ? 'DELETE' : 'POST';
+            
+            const body = isInWishlist ? null : JSON.stringify({ product_id: productId });
+            
+            fetch(url, {
+                method: method,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json',
+                },
+                body: body
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    if (isInWishlist) {
+                        // Remove from wishlist
+                        icon.className = 'ri-heart-line text-lg';
+                        button.classList.remove('text-red-500');
+                    } else {
+                        // Add to wishlist
+                        icon.className = 'ri-heart-fill text-lg text-red-500';
+                        button.classList.add('text-red-500');
+                    }
+                    
+                    // Update wishlist count in navigation if it exists
+                    const wishlistCountElement = document.getElementById('user-wishlist-count');
+                    if (wishlistCountElement) {
+                        const currentCount = parseInt(wishlistCountElement.getAttribute('data-count')) || 0;
+                        const newCount = isInWishlist ? currentCount - 1 : currentCount + 1;
+                        wishlistCountElement.textContent = newCount;
+                        wishlistCountElement.setAttribute('data-count', newCount);
+                    }
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while updating your wishlist.');
+            });
+        }
+    </script>
 @endsection

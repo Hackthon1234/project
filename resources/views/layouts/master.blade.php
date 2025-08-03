@@ -128,6 +128,56 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+
+        /* Enhanced Logo Styles */
+        .logo-container {
+            position: relative;
+            overflow: visible;
+        }
+        
+        .logo-icon {
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .logo-icon:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+        
+        .logo-sparkle {
+            animation: sparkle 2s ease-in-out infinite;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        
+        .logo-text {
+            background: linear-gradient(45deg, #14b8a6, #0d9488, #0f766e);
+            background-size: 200% 200%;
+            animation: gradient-shift 3s ease infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .logo-badge {
+            background: linear-gradient(45deg, #fbbf24, #f59e0b, #d97706);
+            background-size: 200% 200%;
+            animation: badge-glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes badge-glow {
+            0% { background-position: 0% 50%; box-shadow: 0 2px 4px rgba(251, 191, 36, 0.3); }
+            100% { background-position: 100% 50%; box-shadow: 0 2px 8px rgba(251, 191, 36, 0.5); }
+        }
         
         /* Modern Hover Effects */
         .hover-lift {
@@ -391,425 +441,419 @@
         </div>
     </div>
 
-    <!-- Modern Navigation Header -->
-    <header class="glass sticky top-0 z-50 border-b border-white/20" x-data="{ mobileMenuOpen: false, searchOpen: false }">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <!-- Logo with animation -->
-                <a href="/" class="flex items-center space-x-3 group px-2">
-                    <div class="relative">
-                        <div class="w-10 h-10 bg-gradient-to-br from-primary-400 to-primary-600 rounded-xl flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-300">
-                            <i class="ri-shopping-bag-3-line text-xl text-white"></i>
+    <!-- Redesigned Attractive Navigation Header -->
+<header class="bg-white sticky top-0 z-50 border-b border-gray-100 shadow-sm backdrop-blur-sm bg-opacity-90" x-data="{ mobileMenuOpen: false }">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Main navbar container with consistent height -->
+        <div class="flex items-center justify-between h-16"> <!-- Reduced height from h-20 to h-16 -->
+            
+            <!-- Left Section: Logo + Navigation with adjusted spacing -->
+            <div class="flex items-center space-x-2"> <!-- Reduced from space-x-4 to space-x-2 -->
+                <!-- Logo Section with adjusted size -->
+                <div class="flex-shrink-0 mr-4"> <!-- Reduced from mr-6 to mr-4 -->
+                    <a href="/" class="flex items-center space-x-1.5 group logo-container transform hover:scale-[1.02] transition-transform duration-300"> <!-- Reduced from space-x-2 to space-x-1.5 -->
+                        <!-- Logo Icon with adjusted size -->
+                        <div class="relative">
+                            <div class="w-10 h-10 bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-md transition-all duration-200 transform group-hover:rotate-[3deg] logo-icon">
+                                <div class="relative">
+                                    <i class="ri-shopping-cart-2-line text-white text-lg"></i>
+                                    <div class="absolute -top-1 -right-1 w-1.5 h-1.5 bg-yellow-400 rounded-full animate-pulse"></div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="absolute -inset-1 bg-gradient-to-br from-primary-400 to-primary-600 rounded-xl blur opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
-                    </div>
-                    <div class="flex flex-col px-2">
-                        <span class="font-bold text-xl text-gray-900">Vybe<span class="text-gradient">Cart</span></span>
-                        <div class="text-[10px] text-gray-500 font-medium tracking-wider py-1 -mt-1.5">PREMIUM STORE</div>
-                    </div>
-                </a>
-
-                <!-- Desktop Navigation -->
-                <nav class="hidden lg:flex items-center space-x-8">
-                    <a href="/" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200 relative group">
-                        Home
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-300 group-hover:w-full"></span>
+                        
+                        <!-- Brand Text with adjusted size -->
+                        <div class="flex flex-col">
+                            <h1 class="text-xl font-black tracking-tight"> <!-- Reduced from text-2xl -->
+                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700 logo-text">Vybe</span>
+                                <span class="text-gray-800">Cart</span>
+                            </h1>
+                        </div>
                     </a>
-                    <div class="relative group">
-                        <button class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200 flex items-center">
-                            Categories
-                            <i class="ri-arrow-down-s-line ml-1 transform group-hover:rotate-180 transition-transform duration-300"></i>
+                </div>
+
+                <!-- Desktop Navigation with consistent spacing -->
+                <nav class="hidden lg:flex items-center space-x-0.5"> <!-- Reduced from space-x-1 to space-x-0.5 -->
+                    <!-- Navigation Items with consistent padding -->
+                    <a href="/" class="px-2.5 py-2 text-gray-700 hover:text-primary-600 font-medium text-sm transition-all duration-300 rounded-lg hover:bg-gray-50 group"> <!-- Reduced from px-3 to px-2.5 -->
+                        <span class="relative inline-flex items-center">
+                            <i class="ri-home-line mr-1.5 text-primary-500 group-hover:text-primary-600 transition-colors"></i>
+                            Home
+                            <span class="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-primary-500 group-hover:w-full transition-all duration-300"></span>
+                        </span>
+                    </a>
+                    
+                    <!-- Categories Dropdown -->
+                    <div class="relative group" x-data="{ open: false }">
+                        <button @mouseenter="open = true" @mouseleave="open = false" 
+                            class="px-2.5 py-2 text-gray-700 hover:text-primary-600 font-medium text-sm transition-all duration-300 rounded-lg hover:bg-gray-50 flex items-center"> <!-- Reduced from px-3 to px-2.5 -->
+                            <span class="relative inline-flex items-center">
+                                <i class="ri-apps-line mr-1.5 text-primary-500 group-hover:text-primary-600 transition-colors"></i>
+                                Categories
+                                <i class="ri-arrow-down-s-line ml-1 text-sm transition-transform duration-200" :class="{ 'rotate-180': open }"></i>
+                                <span class="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-primary-500 group-hover:w-full transition-all duration-300"></span>
+                            </span>
                         </button>
-                        <div class="absolute top-full left-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 py-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                        <div x-show="open" 
+                             @mouseenter="open = true" @mouseleave="open = false"
+                             x-transition:enter="transition ease-out duration-150"
+                             x-transition:enter-start="opacity-0 transform -translate-y-2"
+                             x-transition:enter-end="opacity-100 transform translate-y-0"
+                             x-transition:leave="transition ease-in duration-100"
+                             x-transition:leave-start="opacity-100 transform translate-y-0"
+                             x-transition:leave-end="opacity-0 transform -translate-y-2"
+                             class="absolute left-0 mt-0.5 w-56 bg-white rounded-lg shadow-lg border border-gray-100 py-2 z-20">
                             @foreach ($categories->take(6) as $category)
                                 <a href="{{ route('categoryproducts', $category->id) }}" 
-                                   class="flex items-center px-6 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition-colors duration-200">
-                                    <i class="ri-arrow-right-s-line text-primary-400 mr-2"></i>
-                                    {{ $category->name }}
+                                   class="flex items-center px-4 py-2 text-sm text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition-colors duration-200">
+                                    <i class="ri-folder-line mr-2 text-primary-400"></i>
+                                    <span>{{ $category->name }}</span>
                                 </a>
                             @endforeach
-                            @if($categories->count() > 6)
-                                <div class="border-t border-gray-100 mt-2 pt-2">
-                                    <a href="/categories" class="flex items-center px-6 py-2 text-primary-600 hover:bg-primary-50 font-medium transition-colors duration-200">
-                                        <i class="ri-grid-line mr-2"></i>
-                                        View All Categories
-                                    </a>
-                                </div>  
-                            @endif
                         </div>
                     </div>
-                    <a href="/about" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200 relative group">
-                        About
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-300 group-hover:w-full"></span>
+                    
+                    <!-- Other nav items with same consistent spacing -->
+                    <a href="{{ route('products.all') }}" class="px-2.5 py-2 text-gray-700 hover:text-primary-600 font-medium text-sm transition-all duration-300 rounded-lg hover:bg-gray-50 group"> <!-- Reduced from px-3 to px-2.5 -->
+                        <span class="relative inline-flex items-center">
+                            <i class="ri-shopping-bag-line mr-1.5 text-primary-500 group-hover:text-primary-600 transition-colors"></i>
+                            Products
+                            <span class="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-primary-500 group-hover:w-full transition-all duration-300"></span>
+                        </span>
                     </a>
-                    <a href="/contact" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200 relative group">
-                        Contact
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-300 group-hover:w-full"></span>
+                    
+                    <a href="/about" class="px-2.5 py-2 text-gray-700 hover:text-primary-600 font-medium text-sm transition-all duration-300 rounded-lg hover:bg-gray-50 group"> <!-- Reduced from px-3 to px-2.5 -->
+                        <span class="relative inline-flex items-center">
+                            <i class="ri-information-line mr-1.5 text-primary-500 group-hover:text-primary-600 transition-colors"></i>
+                            About
+                            <span class="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-primary-500 group-hover:w-full transition-all duration-300"></span>
+                        </span>
+                    </a>
+                    
+                    <a href="/contact" class="px-2.5 py-2 text-gray-700 hover:text-primary-600 font-medium text-sm transition-all duration-300 rounded-lg hover:bg-gray-50 group"> <!-- Reduced from px-3 to px-2.5 -->
+                        <span class="relative inline-flex items-center">
+                            <i class="ri-mail-line mr-1.5 text-primary-500 group-hover:text-primary-600 transition-colors"></i>
+                            Contact
+                            <span class="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-primary-500 group-hover:w-full transition-all duration-300"></span>
+                        </span>
                     </a>
                 </nav>
-
-                <!-- Search Bar (Desktop) -->
-                <div class="hidden lg:flex flex-1 max-w-xl mx-8" x-data="searchSuggestions()">
-                    <form action="{{route('search')}}" method="GET" class="relative w-full group">
-                        <input type="search" name="search" value="{{request('search')}}" 
-                               placeholder=""
-                               class="w-full pl-12 pr-4 py-3 rounded-2xl border-2 border-transparent focus:border-primary-300 focus:ring-4 focus:ring-primary-100 focus:outline-none transition-all duration-300 bg-white/80 backdrop-blur-sm shadow-sm text-center"
-                               minlength="2" required
-                               x-model="query"
-                               @input.debounce.300ms="search()"
-                               @focus="showSuggestions = true"
-                               @keydown.escape="showSuggestions = false"
-                               @keydown.arrow-down.prevent="navigateDown()"
-                               @keydown.arrow-up.prevent="navigateUp()"
-                               @keydown.enter.prevent="selectSuggestion()">
-                        <i class="ri-search-line absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 group-focus-within:text-primary-500 transition-colors duration-200"></i>
-                        <button type="submit"
-                                class="absolute right-2 top-1/2 -translate-y-1/2 px-6 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl hover:from-primary-600 hover:to-primary-700 transition-all duration-200 text-sm font-semibold shadow-md hover:shadow-lg hover:scale-105">
-                            Search
-                        </button>
-                        
-                        <!-- Search Suggestions Dropdown -->
-                        <div x-show="showSuggestions && suggestions.length > 0" 
-                             x-transition:enter="transition ease-out duration-200"
-                             x-transition:enter-start="opacity-0 transform translate-y-2"
-                             x-transition:enter-end="opacity-100 transform translate-y-0"
-                             x-transition:leave="transition ease-in duration-150"
-                             x-transition:leave-start="opacity-100 transform translate-y-0"
-                             x-transition:leave-end="opacity-0 transform translate-y-2"
-                             @click.away="showSuggestions = false"
-                             class="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-200 z-50 max-h-96 overflow-y-auto">
-                            <template x-for="(suggestion, index) in suggestions" :key="suggestion.id + suggestion.type">
-                                <div :class="{'bg-primary-50': selectedIndex === index}"
-                                     @click="selectSuggestionByIndex(index)"
-                                     @mouseenter="selectedIndex = index"
-                                     class="cursor-pointer hover:bg-primary-50 transition-colors duration-200">
-                                    <!-- Product Suggestion -->
-                                    <div x-show="suggestion.type === 'product'" class="flex items-center p-4 border-b border-gray-100 last:border-b-0">
-                                        <img :src="suggestion.image" :alt="suggestion.name" class="w-12 h-12 object-cover rounded-lg mr-4">
-                                        <div class="flex-1">
-                                            <h4 class="font-semibold text-gray-900 text-sm line-clamp-1" x-text="suggestion.name"></h4>
-                                            <p class="text-xs text-gray-500" x-text="suggestion.category"></p>
-                                            <div class="flex items-center space-x-2 mt-1">
-                                                <span class="font-bold text-primary-600" x-text="'$' + suggestion.price"></span>
-                                                <span x-show="suggestion.original_price !== suggestion.price" 
-                                                      class="text-xs text-gray-400 line-through" 
-                                                      x-text="'$' + suggestion.original_price"></span>
-                                            </div>
-                                        </div>
-                                        <i class="ri-arrow-right-line text-gray-400"></i>
-                                    </div>
-                                    <!-- Category Suggestion -->
-                                    <div x-show="suggestion.type === 'category'" class="flex items-center p-4 border-b border-gray-100 last:border-b-0">
-                                        <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mr-4">
-                                            <i class="ri-folder-line text-primary-600"></i>
-                                        </div>
-                                        <div class="flex-1">
-                                            <h4 class="font-semibold text-gray-900 text-sm" x-text="suggestion.name"></h4>
-                                            <p class="text-xs text-gray-500">Browse category</p>
-                                        </div>
-                                        <i class="ri-arrow-right-line text-gray-400"></i>
-                                    </div>
-                                </div>
-                            </template>
-                            
-                            <!-- No Results -->
-                            <div x-show="suggestions.length === 0 && query.length >= 2 && !loading" class="p-4 text-center text-gray-500">
-                                <i class="ri-search-line text-2xl mb-2"></i>
-                                <p class="text-sm">No suggestions found</p>
-                            </div>
-                            
-                            <!-- Loading -->
-                            <div x-show="loading" class="p-4 text-center">
-                                <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-primary-500 mx-auto"></div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- User Actions -->
-                <div class="flex items-center space-x-3">
-                    @auth
-                        <!-- Cart Count Display next to User Account -->
-                        @php
-                            $userCartCount = \App\Models\Cart::where('user_id', auth()->id())->sum('quantity');
-                        @endphp
-                        <div class="relative group">
-                            <a href="{{ route('mycart') }}" 
-                               class="flex items-center space-x-2 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white rounded-full px-4 py-2.5 font-medium transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-0.5">
-                                <i class="ri-shopping-cart-2-line text-lg"></i>
-                                <span class="text-sm font-semibold">Cart</span>
-                                <!-- Cart Count Badge -->
-                                <div id="user-cart-count" 
-                                     class="flex items-center justify-center min-w-[24px] h-6 bg-white text-primary-600 rounded-full text-xs font-bold px-2 ml-1"
-                                     data-count="{{ $userCartCount }}">
-                                    {{ $userCartCount }}
-                                </div>
-                            </a>
-                            
-                            <!-- Floating cart info tooltip -->
-                            <div class="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none">
-                                @if($userCartCount > 0)
-                                    {{ $userCartCount }} {{ $userCartCount == 1 ? 'item' : 'items' }} in cart
-                                @else
-                                    Your cart is empty
-                                @endif
-                                <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
-                            </div>
-                        </div>
-
-                        <div class="relative" x-data="{ userMenuOpen: false }" @click.away="userMenuOpen = false">
-                            <button @click="userMenuOpen = !userMenuOpen" 
-                                    class="flex items-center space-x-2 text-gray-700 hover:text-primary-600 transition-colors duration-200 bg-white/80 backdrop-blur-sm rounded-full px-3 py-2 border border-gray-200 hover:border-primary-300 hover:shadow-md">
-                                <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=14b8a6&color=fff" 
-                                     alt="Profile" 
-                                     class="w-8 h-8 rounded-full ring-2 ring-primary-100">
-                                <span class="hidden sm:block font-medium text-sm">{{ auth()->user()->name }}</span>
-                                <i class="ri-arrow-down-s-line transform transition-transform duration-200" 
-                                   :class="{ 'rotate-180': userMenuOpen }"></i>
-                            </button>
-                            
-                            <!-- Dropdown Menu -->
-                            <div x-show="userMenuOpen" 
-                                 x-cloak
-                                 x-transition:enter="transition ease-out duration-200"
-                                 x-transition:enter-start="opacity-0 transform scale-95"
-                                 x-transition:enter-end="opacity-100 transform scale-100"
-                                 x-transition:leave="transition ease-in duration-150"
-                                 x-transition:leave-start="opacity-100 transform scale-100"
-                                 x-transition:leave-end="opacity-0 transform scale-95"
-                                 @click.away="userMenuOpen = false"
-                                 class="absolute right-0 mt-3 w-56 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50 overflow-hidden"
-                                 style="display: none;"
-                                 x-init="$el.style.display = 'none'">
-                                
-                                <!-- User Info Header -->
-                                <div class="px-4 py-3 border-b border-gray-100 bg-gradient-to-r from-primary-50 to-primary-100">
-                                    <div class="flex items-center space-x-3">
-                                        <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=14b8a6&color=fff" 
-                                             alt="Profile" 
-                                             class="w-10 h-10 rounded-full">
-                                        <div>
-                                            <p class="font-semibold text-gray-900 text-sm">{{ auth()->user()->name }}</p>
-                                            <p class="text-xs text-gray-500">{{ auth()->user()->email }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Menu Items -->
-                                <div class="py-1">
-                                    @if(auth()->user()->role === 'admin')
-                                        <a href="{{ route('dashboard') }}" 
-                                           class="flex items-center px-4 py-3 text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors duration-200 group">
-                                            <i class="ri-dashboard-line w-5 h-5 mr-3 text-gray-400 group-hover:text-primary-500"></i> 
-                                            <span class="font-medium">Admin Dashboard</span>
-                                        </a>
-                                    @endif
-                                    <a href="{{ route('myorders') }}" 
-                                       class="flex items-center px-4 py-3 text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors duration-200 group">
-                                        <i class="ri-shopping-bag-line w-5 h-5 mr-3 text-gray-400 group-hover:text-primary-500"></i> 
-                                        <span class="font-medium">My Orders</span>
-                                        @php
-                                            $pendingOrdersCount = \App\Models\Order::where('user_id', auth()->id())->where('status', 'pending')->count();
-                                        @endphp
-                                        @if($pendingOrdersCount > 0)
-                                            <span class="ml-auto bg-primary-100 text-primary-600 text-xs px-2 py-1 rounded-full font-medium">
-                                                {{ $pendingOrdersCount }}
-                                            </span>
-                                        @endif
-                                    </a>
-                                </div>
-
-                                <!-- Divider -->
-                                <div class="border-t border-gray-100 my-1"></div>
-
-                                <!-- Settings & Logout -->
-                                <div class="py-1">
-                                    <a href="#" 
-                                       class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 group">
-                                        <i class="ri-settings-3-line w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-600"></i> 
-                                        <span class="font-medium">Settings</span>
-                                    </a>
-                                    <form action="{{ route('logout') }}" method="POST" class="w-full">
-                                        @csrf
-                                        <button type="submit" 
-                                                class="w-full flex items-center px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200 group">
-                                            <i class="ri-logout-box-line w-5 h-5 mr-3 text-gray-400 group-hover:text-red-500"></i> 
-                                            <span class="font-medium">Sign Out</span>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    @else
-                        <a href="/login" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 flex items-center bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 border border-gray-200 hover:border-primary-300 hover:shadow-md font-medium">
-                            <i class="ri-user-line mr-2"></i> Sign In
-                        </a>
-                    @endauth
-
-                    <!-- Mobile Menu Button -->
-                    <button @click="mobileMenuOpen = !mobileMenuOpen" 
-                            class="lg:hidden text-gray-700 hover:text-primary-600 transition-colors duration-200 bg-white/80 backdrop-blur-sm rounded-full p-3 border border-gray-200 hover:border-primary-300 hover:shadow-md">
-                        <i class="ri-menu-line text-xl" :class="{ 'ri-close-line': mobileMenuOpen, 'ri-menu-line': !mobileMenuOpen }"></i>
-                    </button>
-                </div>
             </div>
 
-            <!-- Mobile Menu -->
-            <div x-show="mobileMenuOpen" 
-                 x-transition:enter="transition ease-out duration-300"
-                 x-transition:enter-start="opacity-0 transform -translate-y-4"
-                 x-transition:enter-end="opacity-100 transform translate-y-0"
-                 x-transition:leave="transition ease-in duration-200"
-                 x-transition:leave-start="opacity-100 transform translate-y-0"
-                 x-transition:leave-end="opacity-0 transform -translate-y-4"
-                 class="lg:hidden border-t border-gray-200 bg-white/95 backdrop-blur-md">
-                <div class="px-4 py-6 space-y-4">
-                    <!-- Mobile Search -->
-                    <div x-data="searchSuggestions()" class="mb-6">
-                        <form action="{{route('search')}}" method="GET" class="relative">
-                            <input type="search" name="search" value="{{request('search')}}" 
-                                   placeholder=""
-                                   class="w-full pl-12 pr-4 py-3 rounded-2xl border-2 border-transparent focus:border-primary-300 focus:ring-4 focus:ring-primary-100 focus:outline-none transition-all duration-300 bg-white shadow-sm text-center"
-                                   minlength="2" required
-                                   x-model="query"
-                                   @input.debounce.300ms="search()"
-                                   @focus="showSuggestions = true"
-                                   @keydown.escape="showSuggestions = false">
-                            <i class="ri-search-line absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                            <button type="submit"
-                                    class="absolute right-2 top-1/2 -translate-y-1/2 px-6 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl hover:from-primary-600 hover:to-primary-700 transition-all duration-200 text-sm font-semibold shadow-md hover:shadow-lg hover:scale-105">
-                                Search
-                            </button>
-                            
-                            <!-- Mobile Search Suggestions -->
-                            <div x-show="showSuggestions && suggestions.length > 0" 
-                                 x-transition:enter="transition ease-out duration-200"
-                                 x-transition:enter-start="opacity-0 transform translate-y-2"
-                                 x-transition:enter-end="opacity-100 transform translate-y-0"
-                                 @click.away="showSuggestions = false"
-                                 class="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-200 z-50 max-h-80 overflow-y-auto">
-                                <template x-for="suggestion in suggestions" :key="suggestion.id + suggestion.type">
-                                    <div @click="window.location.href = suggestion.url" class="cursor-pointer hover:bg-primary-50 transition-colors duration-200">
-                                        <!-- Mobile Product Suggestion -->
-                                        <div x-show="suggestion.type === 'product'" class="flex items-center p-3 border-b border-gray-100 last:border-b-0">
-                                            <img :src="suggestion.image" :alt="suggestion.name" class="w-10 h-10 object-cover rounded-lg mr-3">
-                                            <div class="flex-1 min-w-0">
-                                                <h4 class="font-semibold text-gray-900 text-sm truncate" x-text="suggestion.name"></h4>
-                                                <p class="text-xs text-gray-500" x-text="suggestion.category"></p>
-                                                <span class="font-bold text-primary-600 text-sm" x-text="'$' + suggestion.price"></span>
+            <!-- Center Section: Search Bar -->
+            <div class="hidden md:block max-w-[220px]" x-data="searchSuggestions()"> <!-- Reduced from max-w-xs (320px) to 220px -->
+                <form action="{{route('search')}}" method="GET" class="relative">
+                    <input type="search" name="search" x-model="query" 
+                           placeholder="Search products..."
+                           x-on:input.debounce.300ms="search()"
+                           x-on:focus="showSuggestions = query.length >= 2 && suggestions.length > 0"
+                           x-on:blur="setTimeout(() => showSuggestions = false, 200)"
+                           x-on:keydown.arrow-down.prevent="navigateDown()"
+                           x-on:keydown.arrow-up.prevent="navigateUp()"
+                           x-on:keydown.enter.prevent="selectSuggestion()"
+                           class="w-full pl-8 pr-4 py-1.5 rounded-lg border border-gray-200 focus:border-primary-400 focus:ring-2 focus:ring-primary-100 focus:outline-none transition-all duration-200 text-sm placeholder-gray-400"> <!-- Reduced padding -->
+                    <i class="ri-search-2-line absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm"></i> <!-- Adjusted position -->
+                    <button type="submit" class="absolute right-2 top-1/2 transform -translate-y-1/2 text-primary-500 hover:text-primary-600 transition-colors">
+                        <i class="ri-arrow-right-line text-sm"></i> <!-- Made icon smaller -->
+                    </button>
+                    
+                    <!-- Search Suggestions Dropdown -->
+                    <div x-show="showSuggestions" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 transform -translate-y-2"
+                         x-transition:enter-end="opacity-100 transform translate-y-0"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100 transform translate-y-0"
+                         x-transition:leave-end="opacity-0 transform -translate-y-2"
+                         class="absolute left-0 right-0 mt-1 bg-white rounded-lg shadow-lg border border-gray-100 py-1 z-20 max-h-80 overflow-y-auto">
+                        
+                        <!-- Loading State -->
+                        <template x-if="loading">
+                            <div class="px-4 py-3 text-sm text-gray-500 flex items-center">
+                                <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-primary-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                <span>Searching...</span>
+                            </div>
+                        </template>
+                        
+                        <!-- No Results State -->
+                        <template x-if="!loading && suggestions.length === 0 && query.length >= 2">
+                            <div class="px-4 py-3 text-sm text-gray-500">
+                                No results found for "<span x-text="query"></span>"
+                            </div>
+                        </template>
+                        
+                        <!-- Suggestion Results -->
+                        <template x-for="(suggestion, index) in suggestions" :key="suggestion.id">
+                            <div @click="selectSuggestionByIndex(index)"
+                                 :class="{'bg-primary-50': selectedIndex === index}"
+                                 class="px-4 py-2 hover:bg-primary-50 cursor-pointer transition-colors search-suggestion-item"
+                                 :class="{'selected': selectedIndex === index}">
+                                <template x-if="suggestion.type === 'product'">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-gray-100 rounded-md overflow-hidden">
+                                            <img :src="suggestion.image" :alt="suggestion.name" class="w-full h-full object-cover">
+                                        </div>
+                                        <div class="ml-3 flex-1">
+                                            <div class="text-sm font-medium text-gray-900" x-html="highlightMatch(suggestion.name)"></div>
+                                            <div class="flex items-center text-xs">
+                                                <span class="text-primary-600 font-medium" x-text="'$' + suggestion.price"></span>
+                                                <template x-if="suggestion.original_price > suggestion.price">
+                                                    <span class="ml-1.5 text-gray-400 line-through" x-text="'$' + suggestion.original_price"></span>
+                                                </template>
+                                                <span class="ml-auto text-gray-500" x-text="suggestion.category"></span>
                                             </div>
                                         </div>
-                                        <!-- Mobile Category Suggestion -->
-                                        <div x-show="suggestion.type === 'category'" class="flex items-center p-3 border-b border-gray-100 last:border-b-0">
-                                            <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mr-3">
-                                                <i class="ri-folder-line text-primary-600 text-sm"></i>
-                                            </div>
-                                            <div class="flex-1">
-                                                <h4 class="font-semibold text-gray-900 text-sm" x-text="suggestion.name"></h4>
-                                                <p class="text-xs text-gray-500">Browse category</p>
-                                            </div>
+                                        <div x-show="selectedIndex === index" class="ml-2 text-gray-500 text-xs hidden sm:block">
+                                            <span class="px-1.5 py-0.5 bg-gray-100 rounded">Enter</span>
+                                        </div>
+                                    </div>
+                                </template>
+                                <template x-if="suggestion.type === 'category'">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 flex-shrink-0 bg-primary-100 rounded-md flex items-center justify-center text-primary-600">
+                                            <i class="ri-folder-line"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <div class="text-sm font-medium text-gray-900" x-html="highlightMatch(suggestion.name)"></div>
+                                            <div class="text-xs text-gray-500">Category</div>
+                                        </div>
+                                        <div x-show="selectedIndex === index" class="ml-auto text-gray-500 text-xs hidden sm:block">
+                                            <span class="px-1.5 py-0.5 bg-gray-100 rounded">Enter</span>
                                         </div>
                                     </div>
                                 </template>
                             </div>
-                        </form>
+                        </template>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Right Section with adjusted spacing -->
+            <div class="flex items-center space-x-2"> <!-- Reduced from space-x-3 to space-x-2 -->
+                @auth
+                    <!-- Action Buttons with consistent size -->
+                    <div class="flex items-center space-x-1"> <!-- Reduced from space-x-2 to space-x-1 -->
+                        <a href="{{ route('wishlist.index') }}" class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-100 text-gray-700 transition-all duration-200 group relative">
+                            <i class="ri-heart-line text-lg group-hover:text-pink-500"></i>
+                            @php $userWishlistCount = \App\Models\Wishlist::where('user_id', auth()->id())->count(); @endphp
+                            @if($userWishlistCount > 0)
+                                <span class="absolute -top-1 -right-1 flex h-4 w-4">
+                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-4 w-4 bg-pink-500 text-xs text-white items-center justify-center">{{ $userWishlistCount }}</span>
+                                </span>
+                            @endif
+                        </a>
+                        
+                        <a href="{{ route('mycart') }}" class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-100 text-gray-700 transition-all duration-200 group relative">
+                            <i class="ri-shopping-cart-2-line text-lg group-hover:text-primary-500"></i>
+                            @php $userCartCount = \App\Models\Cart::where('user_id', auth()->id())->sum('quantity'); @endphp
+                            @if($userCartCount > 0)
+                                <span class="absolute -top-1 -right-1 flex h-4 w-4">
+                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-4 w-4 bg-primary-500 text-xs text-white items-center justify-center">{{ $userCartCount }}</span>
+                                </span>
+                            @endif
+                        </a>
                     </div>
 
-                    <!-- Mobile Navigation Links -->
-                    <nav class="space-y-2">
-                        <a href="/" class="flex items-center px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-colors duration-200 font-medium">
-                            <i class="ri-home-line mr-3"></i> Home
-                        </a>
-                        
-                        <div x-data="{ categoriesOpen: false }" @click.away="categoriesOpen = false">
-                            <button @click="categoriesOpen = !categoriesOpen" 
-                                    class="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-colors duration-200 font-medium">
-                                <span class="flex items-center">
-                                    <i class="ri-grid-line mr-3"></i> Categories
-                                </span>
-                                <i class="ri-arrow-down-s-line transform transition-transform duration-200" 
-                                   :class="{ 'rotate-180': categoriesOpen }"></i>
-                            </button>
-                            <div x-show="categoriesOpen" 
-                                 x-cloak
-                                 x-transition:enter="transition ease-out duration-200"
-                                 x-transition:enter-start="opacity-0 transform -translate-y-2"
-                                 x-transition:enter-end="opacity-100 transform translate-y-0"
-                                 class="ml-4 mt-2 space-y-1"
-                                 style="display: none;">
-                                @foreach ($categories->take(6) as $category)
-                                    <a href="{{ route('categoryproducts', $category->id) }}" 
-                                       class="flex items-center px-4 py-2 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors duration-200">
-                                        <i class="ri-arrow-right-s-line text-primary-400 mr-2 text-sm"></i>
-                                        {{ $category->name }}
-                                    </a>
-                                @endforeach
+                    <!-- User Menu Button -->
+                    <div class="relative" x-data="{ userMenuOpen: false }">
+                        <button @click="userMenuOpen = !userMenuOpen" 
+                            class="flex items-center space-x-1.5 px-2 py-2 rounded-lg hover:bg-gray-100 text-gray-700 transition-all duration-200 group"> <!-- Reduced spacing -->
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center text-white text-sm font-bold shadow-sm group-hover:shadow-md transition-shadow">
+                                <i class="ri-user-3-fill"></i>
                             </div>
-                        </div>
+                            <span class="font-medium text-sm hidden sm:block group-hover:text-primary-600 transition-colors">{{ Str::limit(auth()->user()->name, 8) }}</span> <!-- Reduced limit from 10 to 8 -->
+                            <i class="ri-arrow-down-s-line text-sm transition-transform duration-200" :class="{ 'rotate-180': userMenuOpen }"></i>
+                        </button>
                         
-                        <a href="/about" class="flex items-center px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-colors duration-200 font-medium">
-                            <i class="ri-information-line mr-3"></i> About
-                        </a>
-                        <a href="/contact" class="flex items-center px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-colors duration-200 font-medium">
-                            <i class="ri-mail-line mr-3"></i> Contact
-                        </a>
-                    </nav>
-
-                    <!-- Mobile User Actions -->
-                    @auth
-                        <div class="border-t border-gray-200 pt-4 mt-6">
-                            <div class="flex items-center space-x-3 mb-4 px-4">
-                                <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=14b8a6&color=fff" 
-                                     alt="Profile" 
-                                     class="w-10 h-10 rounded-full ring-2 ring-primary-100">
-                                <div>
-                                    <p class="font-semibold text-gray-900">{{ auth()->user()->name }}</p>
-                                    <p class="text-sm text-gray-500">{{ auth()->user()->email }}</p>
+                        <!-- User Dropdown Menu -->
+                        <div x-show="userMenuOpen" 
+                             @click.away="userMenuOpen = false"
+                             x-transition:enter="transition ease-out duration-200"
+                             x-transition:enter-start="opacity-0 transform scale-95"
+                             x-transition:enter-end="opacity-100 transform scale-100"
+                             x-transition:leave="transition ease-in duration-150"
+                             x-transition:leave-start="opacity-100 transform scale-100"
+                             x-transition:leave-end="opacity-0 transform scale-95"
+                             class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-100 py-2 z-20">
+                            
+                            <!-- User Profile Header -->
+                            <div class="px-4 py-2 border-b border-gray-100">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-9 h-9 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center text-white shadow-sm">
+                                        <i class="ri-user-3-fill"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-900 text-sm">{{ auth()->user()->name }}</div>
+                                        <div class="text-xs text-gray-500 truncate">{{ auth()->user()->email }}</div>
+                                    </div>
                                 </div>
                             </div>
-                            <nav class="space-y-1">
+                            
+                            <!-- Menu Items -->
+                            <div class="py-1">
                                 @if(auth()->user()->role === 'admin')
-                                    <a href="{{ route('dashboard') }}" class="flex items-center px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-colors duration-200">
-                                        <i class="ri-dashboard-line mr-3"></i> Admin Dashboard
+                                    <a href="{{ route('dashboard') }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition-colors">
+                                        <i class="ri-dashboard-line mr-2 text-primary-500"></i> 
+                                        <span>Dashboard</span>
                                     </a>
                                 @endif
-                                <a href="{{ route('myorders') }}" class="flex items-center px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-colors duration-200">
-                                    <i class="ri-shopping-bag-line mr-3"></i> My Orders
+                                
+                                <a href="{{ route('myorders') }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition-colors">
+                                    <i class="ri-shopping-bag-line mr-2 text-blue-500"></i> 
+                                    <span>My Orders</span>
                                 </a>
-                                <a href="{{ route('mycart') }}" class="flex items-center justify-between px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-colors duration-200">
-                                    <div class="flex items-center">
-                                        <i class="ri-shopping-cart-2-line mr-3"></i> 
-                                        <span>My Cart</span>
-                                    </div>
-                                    @php
-                                        $mobileCartCount = \App\Models\Cart::where('user_id', auth()->id())->sum('quantity');
-                                    @endphp
-                                    <div id="mobile-cart-count" 
-                                         class="flex items-center justify-center min-w-[24px] h-6 bg-primary-100 text-primary-600 rounded-full text-xs font-bold px-2 {{ $mobileCartCount > 0 ? '' : 'opacity-50' }}"
-                                         data-count="{{ $mobileCartCount }}">
-                                        {{ $mobileCartCount }}
-                                    </div>
+                                
+                                <a href="{{ route('wishlist.index') }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition-colors">
+                                    <i class="ri-heart-line mr-2 text-pink-500"></i> 
+                                    <span>Wishlist</span>
+                                    @if($userWishlistCount > 0)
+                                        <span class="ml-auto bg-pink-100 text-pink-600 text-xs font-medium px-1.5 py-0.5 rounded-full">
+                                            {{ $userWishlistCount }}
+                                        </span>
+                                    @endif
                                 </a>
-                                <form action="{{ route('logout') }}" method="POST">
+                            </div>
+                            
+                            <!-- Sign Out -->
+                            <div class="border-t border-gray-100 mt-1 pt-1">
+                                <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <button type="submit" class="w-full flex items-center px-4 py-3 text-gray-700 hover:text-red-600 hover:bg-red-50 rounded-xl transition-colors duration-200">
-                                        <i class="ri-logout-box-line mr-3"></i> Sign Out
+                                    <button type="submit" class="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors">
+                                        <i class="ri-logout-box-line mr-2"></i> 
+                                        <span>Sign Out</span>
                                     </button>
                                 </form>
-                            </nav>
+                            </div>
                         </div>
-                    @else
-                        <div class="border-t border-gray-200 pt-4 mt-6">
-                            <a href="/login" class="flex items-center justify-center px-4 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl hover:from-primary-600 hover:to-primary-700 transition-all duration-200 font-medium">
-                                <i class="ri-user-line mr-2"></i> Sign In
-                            </a>
-                        </div>
-                    @endauth
-                </div>
+                    </div>
+                @else
+                    <!-- Auth Buttons with consistent size -->
+                    <div class="flex items-center space-x-1.5"> <!-- Reduced from space-x-2 to space-x-1.5 -->
+                        <a href="{{ route('login') }}" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary-600 transition-all duration-200 hover:bg-gray-50 rounded-lg flex items-center"> <!-- Reduced from px-4 to px-3 -->
+                            <i class="ri-login-circle-line mr-1 text-primary-500"></i> <!-- Reduced from mr-1.5 to mr-1 -->
+                            Sign In
+                        </a>
+                        <a href="{{ route('register') }}" class="px-3 py-2 text-sm font-medium text-white bg-gradient-to-r from-primary-500 to-primary-600 rounded-lg hover:from-primary-600 hover:to-primary-700 transition-all duration-200 shadow-sm hover:shadow-md flex items-center"> <!-- Reduced from px-4 to px-3 -->
+                            <i class="ri-user-add-line mr-1 text-sm"></i> <!-- Reduced from mr-1.5 to mr-1 -->
+                            Sign Up
+                        </a>
+                    </div>
+                @endauth
+
+                <!-- Mobile Menu Button -->
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="lg:hidden w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 text-gray-700 transition-all duration-200 group focus:outline-none"> <!-- Reduced from w-10 h-10 to w-8 h-8 -->
+                    <i x-show="!mobileMenuOpen" class="ri-menu-line text-lg group-hover:text-primary-600"></i>
+                    <i x-show="mobileMenuOpen" class="ri-close-line text-lg group-hover:text-primary-600"></i>
+                </button>
+                
+                <!-- Mobile Search Button -->
+                <button @click="window.location.href = '{{route('search')}}'" class="md:hidden w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 text-gray-700 transition-all duration-200 group focus:outline-none mr-1"> <!-- Reduced from w-10 h-10 to w-8 h-8 -->
+                    <i class="ri-search-2-line text-lg group-hover:text-primary-600"></i>
+                </button>
             </div>
         </div>
-    </header>
+    </div>
 
+    <!-- Mobile Menu with Floating Animation -->
+    <div x-show="mobileMenuOpen" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 transform -translate-y-4"
+         x-transition:enter-end="opacity-100 transform translate-y-0"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 transform translate-y-0"
+         x-transition:leave-end="opacity-0 transform -translate-y-4"
+         class="lg:hidden bg-white border-t border-gray-100 shadow-lg">
+        <div class="px-4 py-4 space-y-3">
+            <!-- Mobile Search with Floating Effect -->
+            <form action="{{route('search')}}" method="GET" class="relative mb-3" x-data="searchSuggestions()">
+                <div class="relative group">
+                    <input type="search" name="search" x-model="query" 
+                           placeholder="Search products..."
+                           x-on:input.debounce.300ms="search()"
+                           x-on:focus="showSuggestions = query.length >= 2 && suggestions.length > 0"
+                           x-on:blur="setTimeout(() => showSuggestions = false, 200)"
+                           x-on:keydown.arrow-down.prevent="navigateDown()"
+                           x-on:keydown.arrow-up.prevent="navigateUp()"
+                           x-on:keydown.enter.prevent="selectSuggestion()"
+                           class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 focus:border-primary-400 focus:ring-2 focus:ring-primary-100 focus:outline-none transition-all duration-200 text-sm placeholder-gray-400">
+                    <i class="ri-search-2-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm group-hover:text-primary-500 transition-colors"></i>
+                    <button type="submit" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-primary-500 hover:text-primary-600">
+                        <i class="ri-arrow-right-line"></i>
+                    </button>
+                </div>
+                
+                <!-- Mobile Search Suggestions Dropdown -->
+                <div x-show="showSuggestions" 
+                     x-transition:enter="transition ease-out duration-200"
+                     x-transition:enter-start="opacity-0 transform -translate-y-2"
+                     x-transition:enter-end="opacity-100 transform translate-y-0"
+                     x-transition:leave="transition ease-in duration-150"
+                     x-transition:leave-start="opacity-100 transform translate-y-0"
+                     x-transition:leave-end="opacity-0 transform -translate-y-2"
+                     class="absolute left-0 right-0 mt-1 bg-white rounded-lg shadow-lg border border-gray-100 py-1 z-50 max-h-60 overflow-y-auto">
+                    
+                    <!-- Loading State -->
+                    <template x-if="loading">
+                        <div class="px-4 py-3 text-sm text-gray-500 flex items-center">
+                            <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-primary-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            <span>Searching...</span>
+                        </div>
+                    </template>
+                    
+                    <!-- No Results State -->
+                    <template x-if="!loading && suggestions.length === 0 && query.length >= 2">
+                        <div class="px-4 py-3 text-sm text-gray-500">
+                            No results found for "<span x-text="query"></span>"
+                        </div>
+                    </template>
+                    
+                    <!-- Suggestion Results -->
+                    <template x-for="(suggestion, index) in suggestions" :key="suggestion.id">
+                        <div @click="selectSuggestionByIndex(index)"
+                             :class="{'bg-primary-50': selectedIndex === index}"
+                             class="px-4 py-2 hover:bg-primary-50 cursor-pointer transition-colors search-suggestion-item"
+                             :class="{'selected': selectedIndex === index}">
+                            <template x-if="suggestion.type === 'product'">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 w-10 h-10 bg-gray-100 rounded-md overflow-hidden">
+                                        <img :src="suggestion.image" :alt="suggestion.name" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="ml-3 flex-1">
+                                        <div class="text-sm font-medium text-gray-900" x-html="highlightMatch(suggestion.name)"></div>
+                                        <div class="flex items-center text-xs">
+                                            <span class="text-primary-600 font-medium" x-text="'$' + suggestion.price"></span>
+                                            <template x-if="suggestion.original_price > suggestion.price">
+                                                <span class="ml-1.5 text-gray-400 line-through" x-text="'$' + suggestion.original_price"></span>
+                                            </template>
+                                            <span class="ml-auto text-gray-500" x-text="suggestion.category"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                            <template x-if="suggestion.type === 'category'">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 flex-shrink-0 bg-primary-100 rounded-md flex items-center justify-center text-primary-600">
+                                        <i class="ri-folder-line"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <div class="text-sm font-medium text-gray-900" x-html="highlightMatch(suggestion.name)"></div>
+                                        <div class="text-xs text-gray-500">Category</div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </form>
+</header>
     <!-- Main Content -->
     <main>
         @yield('content')
@@ -821,9 +865,26 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <!-- Brand Section -->
                 <div>
-                    <div class="flex items-center space-x-2 text-white mb-4">
-                        <i class="ri-shopping-bag-line text-2xl"></i>
-                        <span class="font-bold text-xl">VybeCart</span>
+                    <div class="flex items-center space-x-3 text-white mb-4 logo-container">
+                        <!-- Modern Footer Logo -->
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700 rounded-xl flex items-center justify-center shadow-lg logo-icon">
+                            <div class="relative">
+                                <i class="ri-shopping-cart-2-line text-white text-xl"></i>
+                                <!-- Sparkle dots for footer -->
+                                <div class="absolute -top-1 -right-1 w-1.5 h-1.5 bg-yellow-400 rounded-full logo-sparkle"></div>
+                                <div class="absolute -bottom-1 -left-1 w-1 h-1 bg-pink-400 rounded-full logo-sparkle" style="animation-delay: 1s;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="font-black text-xl">
+                                <span class="text-gradient bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 bg-clip-text text-transparent">Vybe</span><span class="text-white">Cart</span>
+                            </span>
+                            <div class="flex items-center mt-1">
+                                <div class="px-2 py-0.5 logo-badge text-white text-[8px] font-bold rounded-full tracking-wider">
+                                    PRO
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <p class="text-sm">Your trusted shopping destination for quality products and amazing deals.</p>
                     <div class="flex space-x-4 mt-4">
@@ -945,13 +1006,20 @@
                         const response = await fetch(`{{ route('search.suggestions') }}?query=${encodeURIComponent(this.query)}`);
                         const data = await response.json();
                         this.suggestions = data;
-                        this.showSuggestions = true;
+                        this.showSuggestions = this.suggestions.length > 0;
                     } catch (error) {
                         console.error('Search error:', error);
                         this.suggestions = [];
                     } finally {
                         this.loading = false;
                     }
+                },
+                
+                // Highlight matching text in suggestion names
+                highlightMatch(text) {
+                    if (!text || !this.query) return text;
+                    const regex = new RegExp(`(${this.query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
+                    return text.replace(regex, '<span class="bg-yellow-100 font-medium">$1</span>');
                 },
                 
                 selectSuggestion() {
@@ -972,12 +1040,26 @@
                 navigateDown() {
                     if (this.selectedIndex < this.suggestions.length - 1) {
                         this.selectedIndex++;
+                        this.scrollSuggestionIntoView();
                     }
                 },
                 
                 navigateUp() {
                     if (this.selectedIndex > -1) {
                         this.selectedIndex--;
+                        this.scrollSuggestionIntoView();
+                    }
+                },
+                
+                // Ensure the selected suggestion is visible in the dropdown
+                scrollSuggestionIntoView() {
+                    if (this.selectedIndex > -1) {
+                        setTimeout(() => {
+                            const selected = document.querySelector('.search-suggestion-item.selected');
+                            if (selected) {
+                                selected.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+                            }
+                        }, 10);
                     }
                 }
             }

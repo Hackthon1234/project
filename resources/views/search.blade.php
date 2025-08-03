@@ -96,11 +96,22 @@
                                     <!-- Rating Stars -->
                                     <div class="flex items-center mb-4">
                                         <div class="flex text-yellow-400 mr-2">
+                                            @php $avgRating = $product->averageRating(); @endphp
                                             @for($i = 1; $i <= 5; $i++)
-                                                <i class="ri-star-fill text-sm"></i>
+                                                @if($i <= $avgRating)
+                                                    <i class="ri-star-fill text-sm"></i>
+                                                @elseif($i - 0.5 <= $avgRating)
+                                                    <i class="ri-star-half-fill text-sm"></i>
+                                                @else
+                                                    <i class="ri-star-line text-sm"></i>
+                                                @endif
                                             @endfor
                                         </div>
-                                        <span class="text-xs text-gray-500 font-medium">(4.8) 127 reviews</span>
+                                        @if($product->totalReviews() > 0)
+                                            <span class="text-xs text-gray-500 font-medium">({{ number_format($avgRating, 1) }}) {{ $product->totalReviews() }} reviews</span>
+                                        @else
+                                            <span class="text-xs text-gray-500 font-medium">No reviews yet</span>
+                                        @endif
                                     </div>
                                     
                                     <!-- Price Section -->

@@ -52,7 +52,7 @@
                          x-transition:enter-start="opacity-0 transform translate-y-8" 
                          x-transition:enter-end="opacity-100 transform translate-y-0"
                          class="flex flex-wrap gap-6 pt-8">
-                        <a href="#latest-products"
+                        <a href="{{ route('products.all') }}"
                             class="group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-2xl font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 overflow-hidden">
                             <span class="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                             <span class="relative flex items-center">
@@ -192,7 +192,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach ($categories as $index => $category)
                     <div class="group relative" data-aos="fade-up" data-aos-duration="800" data-aos-delay="{{ $index * 100 }}">
-                        <a href="{{ route('categoryproducts', $category->id) }}" 
+                        <a href="{{ route('products.all', ['category' => $category->id]) }}" 
                            class="block relative h-96 overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105">
                             <!-- Background Image with Overlay Effects -->
 
@@ -206,9 +206,6 @@
 
 
                             <div class="absolute inset-0">
-                                <img src="https://source.unsplash.com/random/600x800/?{{ urlencode($category->name) }}" 
-                                     alt="{{ $category->name }}" 
-                                     class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110">
                                 <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/50 to-transparent"></div>
                                 <div class="absolute inset-0 bg-gradient-to-br from-primary-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                             </div>
@@ -260,17 +257,6 @@
                         </a>
                     </div>
                 @endforeach
-            </div>
-            
-            <!-- View All Categories CTA -->
-            <div class="mt-20 text-center" data-aos="fade-up" data-aos-duration="800" data-aos-delay="600">
-                <a href="/categories"
-                   class="group inline-flex items-center px-10 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-2xl font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">
-                    <i class="ri-grid-3-line mr-3 text-xl"></i>
-                    <span>View All Categories</span>
-                    <i class="ri-arrow-right-line ml-3 transform group-hover:translate-x-1 transition-transform duration-300"></i>
-                    <div class="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </a>
             </div>
         </div>
     </div>
@@ -336,9 +322,21 @@
                                                 <i class="ri-shopping-cart-2-line text-lg"></i>
                                             </button>
                                         </form>
-                                        <button class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-700 hover:bg-red-500 hover:text-white transition-all duration-300 transform hover:scale-110 shadow-lg">
-                                            <i class="ri-heart-line text-lg"></i>
-                                        </button>
+                                        @auth
+                                            <button onclick="toggleWishlist({{ $product->id }}, this)" 
+                                                    class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-700 hover:bg-red-500 hover:text-white transition-all duration-300 transform hover:scale-110 shadow-lg wishlist-btn"
+                                                    data-product-id="{{ $product->id }}">
+                                                @if(auth()->user()->wishlists->contains('product_id', $product->id))
+                                                    <i class="ri-heart-fill text-lg text-red-500"></i>
+                                                @else
+                                                    <i class="ri-heart-line text-lg"></i>
+                                                @endif
+                                            </button>
+                                        @else
+                                            <a href="{{ route('login') }}" class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-700 hover:bg-red-500 hover:text-white transition-all duration-300 transform hover:scale-110 shadow-lg">
+                                                <i class="ri-heart-line text-lg"></i>
+                                            </a>
+                                        @endauth
                                     </div>
                                 </div>
                                 
@@ -366,11 +364,22 @@
                                 <!-- Rating Stars -->
                                 <div class="flex items-center mb-4">
                                     <div class="flex text-yellow-400 mr-2">
+                                        @php $avgRating = $product->averageRating(); @endphp
                                         @for($i = 1; $i <= 5; $i++)
-                                            <i class="ri-star-fill text-sm"></i>
+                                            @if($i <= $avgRating)
+                                                <i class="ri-star-fill text-sm"></i>
+                                            @elseif($i - 0.5 <= $avgRating)
+                                                <i class="ri-star-half-fill text-sm"></i>
+                                            @else
+                                                <i class="ri-star-line text-sm text-gray-300"></i>
+                                            @endif
                                         @endfor
                                     </div>
-                                    <span class="text-xs text-gray-500 font-medium">(4.8) 127 reviews</span>
+                                    @if($product->totalReviews() > 0)
+                                        <span class="text-xs text-gray-500 font-medium">({{ number_format($avgRating, 1) }}) {{ $product->totalReviews() }} reviews</span>
+                                    @else
+                                        <span class="text-xs text-gray-500 font-medium">No reviews yet</span>
+                                    @endif
                                 </div>
                                 
                                 <!-- Price Section -->
@@ -405,7 +414,7 @@
             
             <!-- Enhanced View All Link -->
             <div class="mt-20 text-center" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
-                <a href="{{ route('products.index') }}"
+                <a href="{{ route('products.all') }}"
                    class="group inline-flex items-center px-10 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-2xl font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 relative overflow-hidden">
                     <span class="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                     <span class="relative flex items-center">
@@ -616,4 +625,53 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Toggle wishlist function
+        function toggleWishlist(productId, button) {
+            const icon = button.querySelector('i');
+            const isInWishlist = icon.classList.contains('ri-heart-fill');
+            
+            const url = isInWishlist ? `/wishlist/${productId}` : '/wishlist';
+            const method = isInWishlist ? 'DELETE' : 'POST';
+            
+            const body = isInWishlist ? null : JSON.stringify({ product_id: productId });
+            
+            fetch(url, {
+                method: method,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json',
+                },
+                body: body
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    if (isInWishlist) {
+                        // Remove from wishlist
+                        icon.className = 'ri-heart-line text-lg';
+                    } else {
+                        // Add to wishlist
+                        icon.className = 'ri-heart-fill text-lg text-red-500';
+                    }
+                    
+                    // Update wishlist count in navigation if it exists
+                    const wishlistCountElement = document.getElementById('user-wishlist-count');
+                    if (wishlistCountElement) {
+                        const currentCount = parseInt(wishlistCountElement.getAttribute('data-count')) || 0;
+                        const newCount = isInWishlist ? currentCount - 1 : currentCount + 1;
+                        wishlistCountElement.textContent = newCount;
+                        wishlistCountElement.setAttribute('data-count', newCount);
+                    }
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while updating your wishlist.');
+            });
+        }
+    </script>
 @endsection

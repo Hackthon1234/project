@@ -35,9 +35,9 @@
                 </div>
             @else
                 <!-- Enhanced Cart Items -->
-                <div class="grid lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 gap-8">
                     <!-- Cart Items List -->
-                    <div class="lg:col-span-2 space-y-6">
+                    <div class="space-y-6">
                         @foreach($carts as $index => $cart)
                             <div class="bg-white rounded-3xl shadow-lg overflow-hidden border border-gray-100 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1" 
                                  data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
@@ -114,70 +114,6 @@
                                 </div>
                             </div>
                         @endforeach
-                    </div>
-                    
-                    <!-- Enhanced Cart Summary -->
-                    <div class="lg:col-span-1">
-                        <div class="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 sticky top-8" data-aos="fade-up" data-aos-delay="200">
-                            <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                                <i class="ri-calculator-line mr-3 text-primary-500"></i>
-                                Order Summary
-                            </h3>
-                            
-                            <!-- Cart Items Count -->
-                            <div class="flex justify-between items-center py-4 border-b border-gray-200">
-                                <span class="text-gray-600">Items in Cart</span>
-                                <span class="font-bold text-gray-900">{{ $carts->count() }}</span>
-                            </div>
-                            
-                            <!-- Total Quantity -->
-                            <div class="flex justify-between items-center py-4 border-b border-gray-200">
-                                <span class="text-gray-600">Total Quantity</span>
-                                <span class="font-bold text-gray-900">{{ $carts->sum('quantity') }}</span>
-                            </div>
-                            
-                            <!-- Subtotal -->
-                            <div class="flex justify-between items-center py-4 border-b border-gray-200">
-                                <span class="text-gray-600">Subtotal</span>
-                                <span class="font-bold text-gray-900">
-                                    ${{ $carts->sum(function($cart) {
-                                        return ($cart->product->discounted_price ?: $cart->product->price) * $cart->quantity;
-                                    }) }}
-                                </span>
-                            </div>
-                            
-                            <!-- Shipping -->
-                            <div class="flex justify-between items-center py-4 border-b border-gray-200">
-                                <span class="text-gray-600">Shipping</span>
-                                <span class="font-bold text-green-600">FREE</span>
-                            </div>
-                            
-                            <!-- Total -->
-                            <div class="flex justify-between items-center py-6 bg-gradient-to-r from-primary-50 to-primary-100 -mx-8 px-8 mt-6 rounded-2xl">
-                                <span class="text-xl font-bold text-gray-900">Total</span>
-                                <span class="text-2xl font-black text-primary-600">
-                                    ${{ $carts->sum(function($cart) {
-                                        return ($cart->product->discounted_price ?: $cart->product->price) * $cart->quantity;
-                                    }) }}
-                                </span>
-                            </div>
-                            
-                            <!-- Trust Badges -->
-                            <div class="grid grid-cols-2 gap-4 mt-8 pt-6 border-t border-gray-200">
-                                <div class="text-center">
-                                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                                        <i class="ri-shield-check-line text-green-600 text-xl"></i>
-                                    </div>
-                                    <div class="text-xs font-medium text-gray-700">Secure Checkout</div>
-                                </div>
-                                <div class="text-center">
-                                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                                        <i class="ri-truck-line text-blue-600 text-xl"></i>
-                                    </div>
-                                    <div class="text-xs font-medium text-gray-700">Fast Delivery</div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 

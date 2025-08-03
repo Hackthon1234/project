@@ -7,10 +7,13 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',[PagesController::class, 'index']);
+Route::get('/products',[PagesController::class, 'allProducts'])->name('products.all');
 Route::get('/viewproduct/{id}',[PagesController::class, 'viewProduct'])->name('viewproduct');
 Route::get('/categoryproducts/{catid}',[PagesController::class, 'categoryproducts'])->name('categoryproducts');
 Route::get('/search', [PagesController::class, 'search'])->name('search');
@@ -29,6 +32,18 @@ Route::middleware('auth')->group(function(){
     Route::get('/order/store-esewa/{cartid}', [OrderController::class, 'storeEsewa'])->name('order.esewa');
     Route::get('/myorders', [PagesController::class, 'myorders'])->name('myorders');
     Route::post('/orders/{orderid}/cancel', [OrderController::class, 'cancelorder'])->name('order.cancel');
+    
+    // Reviews
+    Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::put('/reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
+    Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+    
+    // Wishlist
+    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+    Route::post('/wishlist', [WishlistController::class, 'store'])->name('wishlist.store');
+    Route::delete('/wishlist/{productId}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
+    Route::get('/wishlist/count', [WishlistController::class, 'getWishlistCount'])->name('wishlist.count');
+    Route::get('/wishlist/check/{productId}', [WishlistController::class, 'isInWishlist'])->name('wishlist.check');
 });
 
 Route::get('/dashboard',[DashboardController::class,'dashboard'])->middleware(['auth', 'isadmin'])->name('dashboard');
