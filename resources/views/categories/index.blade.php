@@ -1,8 +1,17 @@
+{{--
+    =====================================================
+    VybeCart - Categories Management
+    =====================================================
+    Description: List all product categories with add, edit, and delete functionality
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}}
 @extends('layouts.app')
 @section('title', 'Categories')
 @section('content')
     <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6">
-        <!-- Header with Add Button -->
+        
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-2xl font-semibold text-gray-800 tracking-tight">Categories</h2>
             <a href="{{ route('categories.create') }}"
@@ -11,10 +20,10 @@
             </a>
         </div>
 
-        <!-- Optional Divider -->
+        
         <div class="border-t border-gray-100 my-4"></div>
 
-        <!-- Categories Table -->
+        
         <div class="overflow-x-auto">
             <table class="w-full divide-y divide-gray-200">
                 <thead class="bg-gradient-to-r from-indigo-50 to-blue-50">
@@ -28,7 +37,7 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    <!-- Example Row And Looping -->    
+                        
                     @foreach($categories as $category)
                     <tr class="hover:bg-blue-50 transition-colors duration-150">
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $category->order }}</td>

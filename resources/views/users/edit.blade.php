@@ -1,9 +1,18 @@
+{{--
+    =====================================================
+    VybeCart - Edit User
+    =====================================================
+    Description: Form to update user information and roles
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}}
 @extends('layouts.app')
 @section('title', 'Edit User')
 @section('content')
 
 <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6">
-    <!-- Header -->
+    
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-semibold text-gray-800 tracking-tight">Edit User</h2>
         <a href="{{ route('users.index') }}" class="inline-flex items-center px-4 py-2 rounded-xl bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 text-gray-700 font-medium hover:bg-gray-200 transition duration-200">
@@ -12,10 +21,10 @@
         </a>
     </div>
 
-    <!-- Optional Divider -->
+    
     <div class="border-t border-gray-100 my-4"></div>
 
-    <!-- Success/Error Messages -->
+    
     @if(session('success'))
         <div class="mb-6 bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-xl">
             <div class="flex items-center">
@@ -34,13 +43,13 @@
         </div>
     @endif
 
-    <!-- Edit User Form -->
+    
     <div class="max-w-2xl mx-auto">
         <form action="{{ route('users.update', $user->id) }}" method="POST" class="space-y-6">
             @csrf
             @method('PUT')
             
-            <!-- User Avatar Display -->
+            
             <div class="text-center mb-8">
                 <div class="w-24 h-24 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <i class="ri-user-line text-4xl text-indigo-600"></i>
@@ -49,7 +58,7 @@
                 <p class="text-gray-500">User ID: #{{ $user->id }}</p>
             </div>
 
-            <!-- Name Field -->
+            
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
                     <i class="ri-user-line mr-1"></i>Full Name
@@ -65,7 +74,7 @@
                 @enderror
             </div>
 
-            <!-- Email Field -->
+            
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
                     <i class="ri-mail-line mr-1"></i>Email Address
@@ -81,7 +90,7 @@
                 @enderror
             </div>
 
-            <!-- Role Field -->
+            
             <div>
                 <label for="role" class="block text-sm font-medium text-gray-700 mb-2">
                     <i class="ri-admin-line mr-1"></i>User Role
@@ -97,7 +106,7 @@
                 @enderror
             </div>
 
-            <!-- Password Field (Optional) -->
+            
             <div>
                 <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
                     <i class="ri-lock-line mr-1"></i>New Password (Leave blank to keep current)
@@ -111,7 +120,7 @@
                 @enderror
             </div>
 
-            <!-- Confirm Password Field -->
+            
             <div>
                 <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-2">
                     <i class="ri-lock-line mr-1"></i>Confirm New Password
@@ -122,7 +131,7 @@
                        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200">
             </div>
 
-            <!-- Account Status Display -->
+            
             <div class="bg-gray-50 rounded-xl p-4">
                 <h4 class="font-medium text-gray-900 mb-3">Account Status</h4>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -149,7 +158,7 @@
                 </div>
             </div>
 
-            <!-- Action Buttons -->
+            
             <div class="flex justify-end gap-4 pt-6">
                 <a href="{{ route('users.show', $user->id) }}" class="inline-flex items-center px-6 py-3 border border-gray-300 rounded-xl text-gray-700 hover:bg-gray-50 transition duration-200">
                     <i class="ri-eye-line mr-2"></i>

@@ -1,3 +1,12 @@
+{{--
+    =====================================================
+    VybeCart - Delete Account Form
+    =====================================================
+    Description: Form section for permanent account deletion
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}}
 <section class="space-y-6">
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">

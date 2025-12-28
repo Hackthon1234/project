@@ -1,14 +1,32 @@
+{--
+    =====================================================
+    VybeCart - Shopping Cart
+    =====================================================
+    Description: Shopping cart management and checkout process
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}
+{{--
+    =====================================================
+    VybeCart - Shopping Cart
+    =====================================================
+    Description: Shopping cart management interface
+    Features: Update quantities, remove items, checkout
+    Author: VybeCart Team
+    =====================================================
+--}}
+
 @extends('layouts.master')
 @section('title', 'My Cart')
 @section('content')
-    <!-- Enhanced Cart Page -->
+    
+    {{-- Cart Page Header --}}
     <div class="relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-primary-50/30 py-12">
-        <!-- Background Decorations -->
         <div class="absolute -top-20 -right-20 w-64 h-64 bg-gradient-to-br from-primary-100 to-primary-200 rounded-full mix-blend-multiply filter blur-3xl opacity-60"></div>
         <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full mix-blend-multiply filter blur-3xl opacity-60"></div>
         
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Enhanced Page Header -->
             <div class="mb-12 text-center" data-aos="fade-up">
                 <div class="inline-flex items-center px-4 py-2 rounded-full bg-primary-50 border border-primary-200 text-primary-700 text-sm font-semibold mb-6">
                     <i class="ri-shopping-cart-2-line mr-2"></i>
@@ -19,7 +37,6 @@
             </div>
             
             @if($carts->isEmpty())
-                <!-- Enhanced Empty Cart State -->
                 <div class="py-20 text-center" data-aos="fade-up" data-aos-delay="100">
                     <div class="max-w-md mx-auto">
                         <div class="inline-flex items-center justify-center w-32 h-32 rounded-full bg-gradient-to-br from-primary-50 to-primary-100 mb-8">
@@ -34,31 +51,26 @@
                     </div>
                 </div>
             @else
-                <!-- Enhanced Cart Items -->
                 <div class="grid grid-cols-1 gap-8">
-                    <!-- Cart Items List -->
                     <div class="space-y-6">
                         @foreach($carts as $index => $cart)
                             <div class="bg-white rounded-3xl shadow-lg overflow-hidden border border-gray-100 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1" 
                                  data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
                                 <div class="p-6">
                                     <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-                                        <!-- Product Image -->
                                         <a href="{{route('viewproduct',$cart->product_id)}}" class="group flex-shrink-0">
                                             <div class="relative overflow-hidden rounded-2xl bg-gray-100 w-32 h-32">
                                                 <img src="{{asset('images/products/'.$cart->product->photopath)}}" 
                                                      alt="{{ $cart->product->name }}" 
                                                      class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
-                                                <!-- Sale Badge -->
                                                 @if($cart->product->discounted_price != '')
                                                     <div class="absolute top-2 left-2 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                                                        SALE
+                                                        <i class="ri-fire-line mr-1"></i>SALE
                                                     </div>
                                                 @endif
                                             </div>
                                         </a>
                                         
-                                        <!-- Product Details -->
                                         <div class="flex-1 min-w-0">
                                             <a href="{{route('viewproduct',$cart->product_id)}}" class="group">
                                                 <h3 class="text-xl font-bold text-gray-900 group-hover:text-primary-600 transition-colors duration-200 mb-2">
@@ -66,32 +78,28 @@
                                                 </h3>
                                             </a>
                                             
-                                            <!-- Category Badge -->
                                             <div class="inline-flex items-center px-2 py-1 rounded-full bg-primary-50 text-primary-600 text-xs font-medium mb-3">
                                                 {{ $cart->product->category->name ?? 'General' }}
                                             </div>
                                             
-                                            <!-- Price Display -->
                                             <div class="flex items-center space-x-3 mb-4">
                                                 @if($cart->product->discounted_price != '')
-                                                    <span class="text-2xl font-black text-gray-900">${{$cart->product->discounted_price}}</span>
-                                                    <span class="text-lg text-gray-400 line-through">${{$cart->product->price}}</span>
+                                                    <span class="text-2xl font-black text-gray-900">Rs. {{$cart->product->discounted_price}}</span>
+                                                    <span class="text-lg text-gray-400 line-through">Rs. {{$cart->product->price}}</span>
                                                     <span class="text-xs font-bold text-white bg-gradient-to-r from-red-500 to-pink-500 px-2 py-1 rounded-full">
                                                         {{ number_format((($cart->product->price - $cart->product->discounted_price) / $cart->product->price) * 100) }}% OFF
                                                     </span>
                                                 @else
-                                                    <span class="text-2xl font-black text-gray-900">${{$cart->product->price}}</span>
+                                                    <span class="text-2xl font-black text-gray-900">Rs. {{$cart->product->price}}</span>
                                                 @endif
                                             </div>
                                             
-                                            <!-- Quantity Display -->
                                             <div class="flex items-center space-x-2">
                                                 <i class="ri-stack-line text-primary-500"></i>
                                                 <span class="text-sm font-medium text-gray-700">Quantity: <span class="font-bold text-primary-600">{{$cart->quantity}}</span></span>
                                             </div>
                                         </div>
                                         
-                                        <!-- Action Buttons -->
                                         <div class="flex flex-col gap-3 w-full sm:w-auto">
                                             <a href="{{route('checkout', $cart->id)}}" 
                                                class="group inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-2xl font-semibold hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg">
@@ -117,7 +125,6 @@
                     </div>
                 </div>
                 
-                <!-- Enhanced Bottom Actions -->
                 <div class="mt-12 flex flex-col sm:flex-row justify-between items-center gap-6 p-8 bg-white rounded-3xl shadow-lg border border-gray-100" data-aos="fade-up" data-aos-delay="300">
                     <a href="/" class="group inline-flex items-center text-primary-600 hover:text-primary-700 font-semibold transition-colors duration-200">
                         <i class="ri-arrow-left-line mr-2 transform group-hover:-translate-x-1 transition-transform duration-200"></i> 
@@ -128,7 +135,7 @@
                         <div class="text-right">
                             <div class="text-sm text-gray-500">Grand Total</div>
                             <div class="text-3xl font-black text-gray-900">
-                                ${{ $carts->sum(function($cart) {
+                                Rs. {{ $carts->sum(function($cart) {
                                     return ($cart->product->discounted_price ?: $cart->product->price) * $cart->quantity;
                                 }) }}
                             </div>

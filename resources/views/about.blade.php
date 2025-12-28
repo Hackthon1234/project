@@ -1,9 +1,26 @@
+{--
+    =====================================================
+    VybeCart - About Us
+    =====================================================
+    Description: Company information and team details
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}
+{{--
+    =====================================================
+    VybeCart - About Us
+    =====================================================
+    Description: Company information and team details
+    Features: Company story, team members, values
+    Author: VybeCart Team
+    =====================================================
+--}}
+
 @extends('layouts.master')
 @section('title', 'About Us')
 @section('content')
-    <!-- Enhanced Hero Section -->
     <div class="relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-700 to-purple-800 text-white py-32">
-        <!-- Background Decorations -->
         <div class="absolute -top-20 -right-20 w-96 h-96 bg-gradient-to-br from-white/10 to-white/5 rounded-full mix-blend-overlay filter blur-3xl"></div>
         <div class="absolute -bottom-20 -left-20 w-96 h-96 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full mix-blend-overlay filter blur-3xl"></div>
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full">
@@ -23,7 +40,6 @@
                     Discover our journey, mission, and the passionate team behind your favorite shopping experience
                 </p>
                 
-                <!-- Floating Stats -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-16" data-aos="fade-up" data-aos-delay="200">
                     <div class="text-center">
                         <div class="text-4xl font-black text-yellow-300">10K+</div>
@@ -42,15 +58,12 @@
         </div>
     </div>
     
-    <!-- Our Story Section -->
     <div class="relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-primary-50/30 py-32">
-        <!-- Background Decorations -->
         <div class="absolute top-20 right-20 w-64 h-64 bg-gradient-to-br from-primary-100 to-primary-200 rounded-full mix-blend-multiply filter blur-3xl opacity-60"></div>
         <div class="absolute bottom-20 left-20 w-64 h-64 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full mix-blend-multiply filter blur-3xl opacity-60"></div>
         
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <!-- Content -->
                 <div data-aos="fade-right" data-aos-duration="800">
                     <div class="inline-flex items-center px-4 py-2 rounded-full bg-primary-50 border border-primary-200 text-primary-700 text-sm font-semibold mb-6">
                         <i class="ri-book-open-line mr-2"></i>
@@ -77,7 +90,6 @@
                         </p>
                     </div>
                     
-                    <!-- Mission Statement -->
                     <div class="mt-12 p-8 bg-gradient-to-r from-primary-50 to-purple-50 rounded-3xl border border-primary-100">
                         <h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
                             <i class="ri-target-line text-primary-500 mr-3"></i>
@@ -90,17 +102,14 @@
                     </div>
                 </div>
                 
-                <!-- Enhanced Image Section -->
                 <div class="relative" data-aos="fade-left" data-aos-duration="800">
                     <div class="relative">
-                        <!-- Main Image -->
                         <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
                             <img src="https://images.unsplash.com/photo-1573164574572-cb89e39749b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
                                  alt="About VybeCart Team" 
                                  class="w-full h-full object-cover">
                         </div>
                         
-                        <!-- Floating Achievement Cards -->
                         <div class="absolute -top-8 -left-8 bg-white rounded-2xl shadow-xl p-6 max-w-xs" data-aos="fade-up" data-aos-delay="400">
                             <div class="flex items-center space-x-4">
                                 <div class="w-12 h-12 bg-gradient-to-r from-green-400 to-green-500 rounded-xl flex items-center justify-center">
@@ -130,7 +139,6 @@
         </div>
     </div>
     
-    <!-- Enhanced Values Section -->
     <div class="relative py-32 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-20" data-aos="fade-up">
@@ -147,7 +155,6 @@
             </div>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Customer First -->
                 <div class="group text-center" data-aos="fade-up" data-aos-delay="100">
                     <div class="card-stack bg-white rounded-3xl shadow-lg p-8 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
                         <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-primary-400 to-primary-600 rounded-2xl flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
@@ -161,7 +168,6 @@
                     </div>
                 </div>
                 
-                <!-- Quality Excellence -->
                 <div class="group text-center" data-aos="fade-up" data-aos-delay="200">
                     <div class="card-stack bg-white rounded-3xl shadow-lg p-8 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
                         <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
@@ -175,7 +181,6 @@
                     </div>
                 </div>
                 
-                <!-- Innovation -->
                 <div class="group text-center" data-aos="fade-up" data-aos-delay="300">
                     <div class="card-stack bg-white rounded-3xl shadow-lg p-8 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
                         <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
@@ -189,7 +194,6 @@
                     </div>
                 </div>
                 
-                <!-- Integrity -->
                 <div class="group text-center" data-aos="fade-up" data-aos-delay="400">
                     <div class="card-stack bg-white rounded-3xl shadow-lg p-8 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
                         <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
@@ -206,7 +210,7 @@
         </div>
     </div>
     
-    <!-- Team Section -->
+    
     <div class="relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-primary-50/30 py-32">
         <div class="absolute top-20 left-20 w-64 h-64 bg-gradient-to-br from-primary-100 to-primary-200 rounded-full mix-blend-multiply filter blur-3xl opacity-60"></div>
         
@@ -225,7 +229,7 @@
             </div>
             
             <div class="grid md:grid-cols-3 gap-8 mb-16">
-                <!-- CEO -->
+                
                 <div class="text-center" data-aos="fade-up" data-aos-delay="100">
                     <div class="relative mb-6">
                         <div class="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-lg">
@@ -241,7 +245,7 @@
                     <p class="text-sm text-gray-500">Leading with vision and passion for customer excellence.</p>
                 </div>
                 
-                <!-- CTO -->
+                
                 <div class="text-center" data-aos="fade-up" data-aos-delay="200">
                     <div class="relative mb-6">
                         <div class="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-lg">
@@ -257,7 +261,7 @@
                     <p class="text-sm text-gray-500">Driving innovation and technical excellence.</p>
                 </div>
                 
-                <!-- Head of Customer Success -->
+                
                 <div class="text-center" data-aos="fade-up" data-aos-delay="300">
                     <div class="relative mb-6">
                         <div class="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-lg">
@@ -274,7 +278,7 @@
                 </div>
             </div>
             
-            <!-- Call to Action -->
+            
             <div class="text-center" data-aos="fade-up" data-aos-delay="400">
                 <div class="inline-flex flex-col sm:flex-row gap-4">
                     <a href="/" class="btn-primary inline-flex items-center px-8 py-4">

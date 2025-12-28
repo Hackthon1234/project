@@ -1,3 +1,12 @@
+{{--
+    =====================================================
+    VybeCart - Auth Session Status
+    =====================================================
+    Description: Display authentication session status messages
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}}
 @props(['status'])
 
 @if ($status)

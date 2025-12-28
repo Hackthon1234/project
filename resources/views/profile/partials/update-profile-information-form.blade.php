@@ -1,3 +1,12 @@
+{{--
+    =====================================================
+    VybeCart - Update Profile Form
+    =====================================================
+    Description: Form section for updating name and email
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}}
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">

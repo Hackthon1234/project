@@ -1,8 +1,17 @@
+{{--
+    =====================================================
+    VybeCart - User Login Page
+    =====================================================
+    Description: User authentication login form with email and password validation
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}}
 @extends('layouts.master')
 @section('content')
 <div class="flex min-h-screen items-center justify-center bg-gradient-to-br from-indigo-100 via-purple-50 to-blue-50 p-4">
     <div class="w-full max-w-md">
-        <!-- Logo Header -->
+        
         <div class="text-center mb-8">
             <div class="mx-auto w-20 h-20 bg-white/90 rounded-xl flex items-center justify-center mb-4 shadow-sm backdrop-blur-sm border border-white/20">
                 <img src="{{ asset('app1.png') }}" alt="Logo" class="h-10 filter brightness-0 invert">
@@ -11,12 +20,12 @@
             <p class="text-gray-600 mt-1 text-sm">Sign in to your admin dashboard</p>
         </div>
 
-        <!-- Login Card -->
+        
         <div class="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 overflow-hidden">
             <div class="p-8">
                 <form class="space-y-6" action="{{ route('login') }}" method="POST">
                     @csrf
-                    <!-- Email Field -->
+                    
                     <div class="mb-6">
                         <label for="email" class="block text-sm font-medium text-gray-700 mb-2 items-center">
                             <i class="ri-mail-line text-indigo-500 mr-2"></i> Email Address
@@ -36,7 +45,7 @@
                         @enderror
                     </div>
 
-                    <!-- Password Field -->
+                    
                     <div class="mb-6">
                         <label for="password" class="block text-sm font-medium text-gray-700 mb-2 items-center">
                             <i class="ri-lock-2-line text-indigo-500 mr-2"></i> Password
@@ -58,7 +67,7 @@
                         @enderror
                     </div>
 
-                    <!-- Remember Me & Forgot Password -->
+                    
                     <div class="flex items-center justify-between mb-6">
                         <div class="flex items-center">
                             <input id="remember" 
@@ -70,7 +79,7 @@
                         <a href="{{ route('password.request') }}" class="text-sm text-indigo-600 hover:text-indigo-500 hover:underline transition-colors">Forgot password?</a>
                     </div>
 
-                    <!-- Submit Button -->
+                    
                     <button type="submit" 
                             class="w-full bg-gradient-to-br from-indigo-500 to-indigo-600 text-white py-3 px-4 rounded-lg shadow hover:shadow-md hover:-translate-y-0.5 transition transform duration-200 flex items-center justify-center font-medium">
                         <i class="ri-login-box-line mr-2"></i> Sign In
@@ -78,7 +87,7 @@
                 </form>
             </div>
 
-            <!-- Footer -->
+            
             <div class="bg-white/80 px-8 py-4 border-t border-white/20 text-center">
                 <p class="text-xs text-gray-600">© {{ date('Y') }} VybeCart. All rights reserved.</p>
             </div>

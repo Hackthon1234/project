@@ -1,10 +1,22 @@
+{{--
+    =====================================================
+    VybeCart - Admin Dashboard
+    =====================================================
+    Description: Main admin control panel with statistics
+                 and management tools
+    Features: Statistics cards, order status, user analytics,
+              charts, and quick actions
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}}
+
 @extends('layouts.app')
-
 @section('title', 'Dashboard')
-
 @section('content')
+    
+    {{-- Dashboard Header --}}
     <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 mb-6">
-        <!-- Header -->
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-2xl font-semibold text-gray-800 tracking-tight">Admin Dashboard</h2>
             <div class="inline-flex items-center px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-50 to-blue-50 border border-indigo-200 text-indigo-700 text-sm font-semibold">
@@ -13,10 +25,8 @@
             </div>
         </div>
 
-        <!-- Optional Divider -->
         <div class="border-t border-gray-100 my-4"></div>
 
-        <!-- Welcome Message -->
         <div class="text-center py-8">
             <h1 class="text-3xl font-bold text-gray-900 mb-2">
                 Welcome Back, <span class="text-indigo-600">{{ auth()->user()->name }}</span>
@@ -27,9 +37,7 @@
         </div>
     </div>
 
-    <!-- Stats Cards -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-        <!-- Total Products -->
         <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6">
             <div class="flex items-center justify-between">
                 <div>
@@ -46,7 +54,6 @@
             </div>
         </div>
 
-        <!-- Total Orders -->
         <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6">
             <div class="flex items-center justify-between">
                 <div>
@@ -63,7 +70,6 @@
             </div>
         </div>
 
-        <!-- Total Users -->
         <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6">
             <div class="flex items-center justify-between">
                 <div>
@@ -80,7 +86,6 @@
             </div>
         </div>
 
-        <!-- Total Categories -->
         <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6">
             <div class="flex items-center justify-between">
                 <div>
@@ -98,9 +103,9 @@
         </div>
     </div>
 
-    <!-- Order Status Row -->
+    
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
-        <!-- Pending Orders -->
+        
         <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6">
             <div class="flex items-center justify-between">
                 <div>
@@ -117,7 +122,7 @@
             </div>
         </div>
 
-        <!-- Processing Orders -->
+        
         <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6">
             <div class="flex items-center justify-between">
                 <div>
@@ -134,7 +139,7 @@
             </div>
         </div>
 
-        <!-- Delivered Orders -->
+        
         <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6">
             <div class="flex items-center justify-between">
                 <div>
@@ -152,11 +157,11 @@
         </div>
     </div>
 
-    <!-- User Statistics Row -->
+    
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-        <!-- Email Verification Stats -->
+        
         <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 overflow-hidden relative verification-card animate-fade-scale">
-            <!-- Background Pattern -->
+            
             <div class="absolute top-0 right-0 w-32 h-32 opacity-5">
                 <svg viewBox="0 0 100 100" class="w-full h-full">
                     <circle cx="50" cy="50" r="45" fill="currentColor" class="text-green-500"/>
@@ -171,7 +176,7 @@
             </div>
             
             <div class="space-y-4 relative z-10">
-                <!-- Verified Users -->
+                
                 <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border border-green-100 animate-slide-in">
                     <div class="flex justify-between items-center mb-2">
                         <div class="flex items-center">
@@ -183,14 +188,14 @@
                             <span class="text-sm text-green-600 font-medium ml-2">({{ $totalusers > 0 ? round(($verifiedUsers / $totalusers) * 100) : 0 }}%)</span>
                         </div>
                     </div>
-                    <!-- Progress Bar -->
+                    
                     <div class="w-full bg-green-200 rounded-full h-2">
                         <div class="bg-gradient-to-r from-green-500 to-emerald-500 h-2 rounded-full transition-all duration-1000 ease-out progress-glow" 
                              style="width: {{ $totalusers > 0 ? ($verifiedUsers / $totalusers) * 100 : 0 }}%"></div>
                     </div>
                 </div>
 
-                <!-- Unverified Users -->
+                
                 <div class="bg-gradient-to-r from-yellow-50 to-amber-50 rounded-lg p-4 border border-yellow-100 animate-slide-in" style="animation-delay: 0.2s;">
                     <div class="flex justify-between items-center mb-2">
                         <div class="flex items-center">
@@ -202,14 +207,14 @@
                             <span class="text-sm text-yellow-600 font-medium ml-2">({{ $totalusers > 0 ? round(($unverifiedUsers / $totalusers) * 100) : 0 }}%)</span>
                         </div>
                     </div>
-                    <!-- Progress Bar -->
+                    
                     <div class="w-full bg-yellow-200 rounded-full h-2">
                         <div class="bg-gradient-to-r from-yellow-500 to-amber-500 h-2 rounded-full transition-all duration-1000 ease-out" 
                              style="width: {{ $totalusers > 0 ? ($unverifiedUsers / $totalusers) * 100 : 0 }}%"></div>
                     </div>
                 </div>
 
-                <!-- Summary Stats -->
+                
                 <div class="flex justify-between items-center pt-2 border-t border-gray-100 animate-slide-in" style="animation-delay: 0.4s;">
                     <div class="text-center">
                         <div class="text-sm text-gray-500">Total Users</div>
@@ -225,7 +230,7 @@
             </div>
         </div>
 
-        <!-- Recent Users -->
+        
         <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6">
             <div class="flex items-center justify-between mb-4">
                 <h3 class="text-lg font-semibold text-gray-800">Recent Users</h3>
@@ -263,9 +268,9 @@
         </div>
     </div>
 
-    <!-- Analytics Charts Section -->
+    
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <!-- Order Status Chart -->
+        
         <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6">
             <div class="flex items-center justify-between mb-6">
                 <h3 class="text-lg font-semibold text-gray-800">Order Status Distribution</h3>
@@ -278,7 +283,7 @@
             </div>
         </div>
 
-        <!-- User Growth Chart -->
+        
         <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6">
             <div class="flex items-center justify-between mb-6">
                 <h3 class="text-lg font-semibold text-gray-800">User Registration Trend</h3>
@@ -292,7 +297,7 @@
         </div>
     </div>
 
-    <!-- Sales Revenue Chart -->
+    
     <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 mb-6">
         <div class="flex items-center justify-between mb-6">
             <h3 class="text-lg font-semibold text-gray-800">Monthly Sales Revenue</h3>
@@ -305,13 +310,13 @@
         </div>
     </div>
 
-    <!-- Quick Actions Section -->
+    
     <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6">
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-2xl font-semibold text-gray-800 tracking-tight">Quick Actions</h2>
         </div>
         
-        <!-- Optional Divider -->
+        
         <div class="border-t border-gray-100 my-4"></div>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -337,10 +342,10 @@
         </div>
     </div>
 
-<!-- Chart.js Library -->
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<!-- Custom Styles for Enhanced UI -->
+
 <style>
     @keyframes slideInUp {
         from {
@@ -383,11 +388,9 @@
 </style>
 
 <script>
-// Chart.js Global Configuration
 Chart.defaults.font.family = 'Inter, system-ui, sans-serif';
 Chart.defaults.color = '#6B7280';
 
-// Order Status Pie Chart
 const orderStatusCtx = document.getElementById('orderStatusChart').getContext('2d');
 const orderStatusChart = new Chart(orderStatusCtx, {
     type: 'doughnut',
@@ -444,7 +447,6 @@ const orderStatusChart = new Chart(orderStatusCtx, {
     }
 });
 
-// User Growth Line Chart
 const userGrowthCtx = document.getElementById('userGrowthChart').getContext('2d');
 const userGrowthChart = new Chart(userGrowthCtx, {
     type: 'line',
@@ -513,7 +515,6 @@ const userGrowthChart = new Chart(userGrowthCtx, {
     }
 });
 
-// Sales Revenue Bar Chart
 const salesCtx = document.getElementById('salesChart').getContext('2d');
 const salesChart = new Chart(salesCtx, {
     type: 'bar',
@@ -588,7 +589,6 @@ const salesChart = new Chart(salesCtx, {
     }
 });
 
-// Add hover animations to stat cards
 document.addEventListener('DOMContentLoaded', function() {
     const statCards = document.querySelectorAll('.bg-white.rounded-xl.shadow-md');
     

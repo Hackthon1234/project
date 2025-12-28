@@ -1,9 +1,26 @@
+{--
+    =====================================================
+    VybeCart - Checkout Page
+    =====================================================
+    Description: Order checkout and payment processing
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}
+{{--
+    =====================================================
+    VybeCart - Checkout Page
+    =====================================================
+    Description: Order checkout and payment processing
+    Features: Order summary, payment options, order placement
+    Author: VybeCart Team
+    =====================================================
+--}}
+
 @extends('layouts.master')
 @section('title', 'Checkout')
 @section('content')
-    <!-- Enhanced Checkout Header -->
     <div class="relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-700 to-purple-800 text-white py-20">
-        <!-- Background Decorations -->
         <div class="absolute -top-10 -right-10 w-64 h-64 bg-gradient-to-br from-white/10 to-white/5 rounded-full mix-blend-overlay filter blur-3xl"></div>
         <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full mix-blend-overlay filter blur-3xl"></div>
         
@@ -23,14 +40,11 @@
         </div>
     </div>
 
-    <!-- Enhanced Checkout Content -->
     <div class="relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-primary-50/30 py-16">
-        <!-- Background Decorations -->
         <div class="absolute top-20 right-20 w-64 h-64 bg-gradient-to-br from-primary-100 to-primary-200 rounded-full mix-blend-multiply filter blur-3xl opacity-60"></div>
         <div class="absolute bottom-20 left-20 w-64 h-64 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full mix-blend-multiply filter blur-3xl opacity-60"></div>
         
         <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Progress Indicator -->
             <div class="mb-12" data-aos="fade-up">
                 <div class="flex items-center justify-center space-x-8">
                     <div class="flex items-center">
@@ -57,7 +71,6 @@
             </div>
 
             <div class="grid lg:grid-cols-2 gap-12">
-                <!-- Order Summary -->
                 <div data-aos="fade-right" data-aos-duration="800">
                     <div class="inline-flex items-center px-4 py-2 rounded-full bg-primary-50 border border-primary-200 text-primary-700 text-sm font-semibold mb-6">
                         <i class="ri-file-list-3-line mr-2"></i>
@@ -65,7 +78,6 @@
                     </div>
                     
                     <div class="card-stack bg-white rounded-3xl shadow-lg overflow-hidden">
-                        <!-- Product Details -->
                         <div class="p-8">
                             <a href="{{ route('viewproduct', $cart->product_id) }}" class="group block">
                                 <div class="flex items-start space-x-6">
@@ -83,16 +95,16 @@
                                             {{ $cart->product->name }}
                                         </h3>
                                         
-                                        <!-- Price Display -->
+                                        
                                         <div class="flex items-center space-x-3 mb-3">
                                             @if ($cart->product->discounted_price != '')
-                                                <span class="text-2xl font-black text-gray-900">${{ $cart->product->discounted_price }}</span>
-                                                <span class="text-lg text-gray-400 line-through">${{ $cart->product->price }}</span>
+                                                <span class="text-2xl font-black text-gray-900">Rs. {{ $cart->product->discounted_price }}</span>
+                                                <span class="text-lg text-gray-400 line-through">Rs. {{ $cart->product->price }}</span>
                                                 <span class="text-xs font-bold text-white bg-red-500 px-2 py-1 rounded-full">
                                                     SAVE {{ number_format((($cart->product->price - $cart->product->discounted_price) / $cart->product->price) * 100) }}%
                                                 </span>
                                             @else
-                                                <span class="text-2xl font-black text-gray-900">${{ $cart->product->price }}</span>
+                                                <span class="text-2xl font-black text-gray-900">Rs. {{ $cart->product->price }}</span>
                                             @endif
                                         </div>
                                         
@@ -105,12 +117,11 @@
                             </a>
                         </div>
                         
-                        <!-- Order Totals -->
                         <div class="border-t border-gray-100 p-8 bg-gray-50">
                             <div class="space-y-4">
                                 <div class="flex justify-between text-gray-600">
                                     <span>Subtotal</span>
-                                    <span>${{ $cart->product->discounted_price != '' ? $cart->product->discounted_price * $cart->quantity : $cart->product->price * $cart->quantity }}</span>
+                                    <span>Rs. {{ $cart->product->discounted_price != '' ? $cart->product->discounted_price * $cart->quantity : $cart->product->price * $cart->quantity }}</span>
                                 </div>
                                 <div class="flex justify-between text-gray-600">
                                     <span>Shipping</span>
@@ -118,12 +129,12 @@
                                 </div>
                                 <div class="flex justify-between text-gray-600">
                                     <span>Tax</span>
-                                    <span>$0.00</span>
+                                    <span>Rs. 0.00</span>
                                 </div>
                                 <div class="border-t border-gray-200 pt-4">
                                     <div class="flex justify-between text-xl font-black text-gray-900">
                                         <span>Total</span>
-                                        <span class="text-primary-600">${{ $cart->product->discounted_price != '' ? $cart->product->discounted_price * $cart->quantity : $cart->product->price * $cart->quantity }}</span>
+                                        <span class="text-primary-600">Rs. {{ $cart->product->discounted_price != '' ? $cart->product->discounted_price * $cart->quantity : $cart->product->price * $cart->quantity }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -131,7 +142,6 @@
                     </div>
                 </div>
 
-                <!-- Payment Methods -->
                 <div data-aos="fade-left" data-aos-duration="800">
                     <div class="inline-flex items-center px-4 py-2 rounded-full bg-primary-50 border border-primary-200 text-primary-700 text-sm font-semibold mb-6">
                         <i class="ri-bank-card-line mr-2"></i>
@@ -139,7 +149,6 @@
                     </div>
                     
                     <div class="space-y-6">
-                        <!-- Cash on Delivery Option -->
                         <div class="card-stack bg-white rounded-3xl shadow-lg p-8 border-2 border-transparent hover:border-primary-200 transition-all duration-300">
                             <div class="flex items-start justify-between mb-6">
                                 <div class="flex items-center">
@@ -182,7 +191,6 @@
                             </form>
                         </div>
 
-                        <!-- eSewa Payment Option -->
                         <div class="card-stack bg-white rounded-3xl shadow-lg p-8 border-2 border-transparent hover:border-primary-200 transition-all duration-300">
                             <div class="flex items-start justify-between mb-6">
                                 <div class="flex items-center">
@@ -236,7 +244,6 @@
                         </div>
                     </div>
                     
-                    <!-- Security Notice -->
                     <div class="mt-8 p-6 bg-gradient-to-r from-primary-50 to-purple-50 rounded-2xl border border-primary-100" data-aos="fade-up" data-aos-delay="200">
                         <div class="flex items-start">
                             <div class="w-10 h-10 bg-primary-500 rounded-xl flex items-center justify-center text-white mr-4 flex-shrink-0">

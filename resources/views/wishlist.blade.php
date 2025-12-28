@@ -1,20 +1,41 @@
+{--
+    =====================================================
+    VybeCart - Wishlist Page
+    =====================================================
+    Description: User wishlist management interface
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}
+{{--
+    =====================================================
+    VybeCart - Wishlist Page
+    =====================================================
+    Description: User wishlist management interface
+                 showing saved products with quick actions
+    Features: Add/remove items, move to cart, empty state
+    Author: VybeCart Team
+    =====================================================
+--}}
+
 @extends('layouts.master')
 @section('title', 'My Wishlist')
 @section('content')
-    <!-- Enhanced Wishlist Header -->
+    
+    {{-- ===================================
+         Page Header with Background
+         ===================================
+    --}}
     <div class="relative overflow-hidden bg-gradient-to-br from-pink-50 via-white to-red-50/30 py-20">
-        <!-- Background Decorations -->
         <div class="absolute -top-20 -right-20 w-64 h-64 bg-gradient-to-br from-pink-100 to-red-200 rounded-full mix-blend-multiply filter blur-3xl opacity-60"></div>
         <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full mix-blend-multiply filter blur-3xl opacity-60"></div>
         
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <!-- Badge -->
             <div class="inline-flex items-center px-4 py-2 rounded-full bg-pink-50 border border-pink-200 text-pink-700 text-sm font-semibold mb-6" data-aos="fade-up">
                 <i class="ri-heart-3-line mr-2"></i>
                 MY FAVORITES
             </div>
             
-            <!-- Main Title -->
             <h1 class="text-4xl md:text-6xl font-black text-gray-900 mb-6" data-aos="fade-up" data-aos-delay="100">
                 My Wishlist
             </h1>
@@ -22,7 +43,6 @@
                 Keep track of your favorite products and never lose sight of what you love most.
             </p>
             
-            <!-- Breadcrumb -->
             <nav class="flex justify-center items-center text-sm" data-aos="fade-up" data-aos-delay="300">
                 <div class="flex items-center space-x-2 bg-white/80 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-gray-200">
                     <a href="/" class="text-gray-500 hover:text-primary-600 transition-colors duration-200 flex items-center">
@@ -36,11 +56,9 @@
         </div>
     </div>
 
-    <!-- Wishlist Content -->
     <div class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             @if($wishlists->count() > 0)
-                <!-- Wishlist Stats -->
                 <div class="mb-12 text-center" data-aos="fade-up">
                     <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-pink-50 to-red-50 rounded-full">
                         <i class="ri-heart-3-fill text-pink-500 mr-2"></i>
@@ -48,31 +66,26 @@
                     </div>
                 </div>
 
-                <!-- Wishlist Grid -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     @foreach ($wishlists as $index => $wishlist)
                         <div class="group relative" data-aos="fade-up" data-aos-duration="800" data-aos-delay="{{ $index * 100 }}">
                             <div class="bg-white rounded-3xl shadow-lg overflow-hidden transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-3">
-                                <!-- Product Image Container -->
                                 <div class="relative aspect-square overflow-hidden bg-gray-100">
                                     <img src="{{ asset('images/products/' . $wishlist->product->photopath) }}"
                                         alt="{{ $wishlist->product->name }}"
                                         class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                                     
-                                    <!-- Remove from Wishlist Button -->
                                     <button onclick="removeFromWishlist({{ $wishlist->product->id }})" 
                                             class="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-red-500 hover:bg-red-500 hover:text-white transition-all duration-300 transform hover:scale-110 shadow-lg">
                                         <i class="ri-heart-fill text-lg"></i>
                                     </button>
                                     
-                                    <!-- Sale Badge -->
                                     @if ($wishlist->product->discounted_price != '')
                                         <div class="absolute top-4 left-4 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold uppercase tracking-wider px-3 py-2 rounded-full shadow-lg">
                                             <i class="ri-fire-line mr-1"></i>SALE
                                         </div>
                                     @endif
                                     
-                                    <!-- Quick Action Overlay -->
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
                                         <div class="flex items-center gap-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                                             <a href="{{ route('viewproduct', $wishlist->product->id) }}" 
@@ -93,9 +106,7 @@
                                     </div>
                                 </div>
                                 
-                                <!-- Product Details -->
                                 <div class="p-6">
-                                    <!-- Category Badge -->
                                     <div class="inline-flex items-center px-2 py-1 rounded-full bg-primary-50 text-primary-600 text-xs font-medium mb-3">
                                         {{ $wishlist->product->category->name ?? 'General' }}
                                     </div>
@@ -106,7 +117,6 @@
                                         </h3>
                                     </a>
                                     
-                                    <!-- Rating Stars -->
                                     <div class="flex items-center mb-4">
                                         <div class="flex text-yellow-400 mr-2">
                                             @php $avgRating = $wishlist->product->averageRating(); @endphp
@@ -127,14 +137,14 @@
                                         @endif
                                     </div>
                                     
-                                    <!-- Price Section -->
                                     <div class="flex items-center justify-between mb-6">
-                                        <div class="flex items-center space-x-2">
+                                        <div class="flex flex-col">
                                             @if ($wishlist->product->discounted_price != '')
-                                                <span class="text-2xl font-black text-gray-900">${{ $wishlist->product->discounted_price }}</span>
-                                                <span class="text-sm text-gray-400 line-through">${{ $wishlist->product->price }}</span>
+                                                <span class="text-2xl font-black text-gray-900">Rs. {{ $wishlist->product->discounted_price }}</span>
+                                                <span class="text-sm text-gray-400 line-through">Rs. {{ $wishlist->product->price }}</span>
                                             @else
-                                                <span class="text-2xl font-black text-gray-900">${{ $wishlist->product->price }}</span>
+                                                <span class="text-2xl font-black text-gray-900">Rs. {{ $wishlist->product->price }}</span>
+                                                <span class="text-sm text-transparent">spacer</span>
                                             @endif
                                         </div>
                                         @if ($wishlist->product->discounted_price != '')
@@ -144,7 +154,6 @@
                                         @endif
                                     </div>
                                     
-                                    <!-- Action Buttons -->
                                     <div class="flex space-x-3">
                                         <a href="{{ route('viewproduct', $wishlist->product->id) }}"
                                            class="flex-1 text-center py-3 px-4 rounded-2xl border-2 border-gray-200 text-gray-700 font-semibold 
@@ -163,7 +172,6 @@
                     @endforeach
                 </div>
 
-                <!-- Clear All Wishlist -->
                 <div class="mt-16 text-center" data-aos="fade-up">
                     <button onclick="clearAllWishlist()" 
                             class="inline-flex items-center px-6 py-3 bg-red-500 text-white rounded-xl font-semibold hover:bg-red-600 transition-colors duration-200">
@@ -172,7 +180,6 @@
                     </button>
                 </div>
             @else
-                <!-- Empty Wishlist State -->
                 <div class="text-center py-20" data-aos="fade-up">
                     <div class="max-w-md mx-auto">
                         <div class="inline-flex items-center justify-center w-32 h-32 rounded-full bg-gradient-to-br from-pink-50 to-red-100 mb-8">
@@ -191,7 +198,6 @@
     </div>
 
     <script>
-        // Remove from wishlist
         function removeFromWishlist(productId) {
             if (confirm('Are you sure you want to remove this item from your wishlist?')) {
                 fetch(`/wishlist/${productId}`, {
@@ -204,7 +210,7 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        location.reload(); // Reload page to show updated wishlist
+                        location.reload();
                     } else {
                         alert('Error: ' + data.message);
                     }
@@ -216,7 +222,6 @@
             }
         }
 
-        // Clear all wishlist
         function clearAllWishlist() {
             if (confirm('Are you sure you want to clear your entire wishlist? This action cannot be undone.')) {
                 @foreach($wishlists as $wishlist)

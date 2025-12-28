@@ -1,3 +1,12 @@
+{{--
+    =====================================================
+    VybeCart - Input Error Component
+    =====================================================
+    Description: Display validation error messages for form fields
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}}
 @props(['messages'])
 
 @if ($messages)

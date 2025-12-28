@@ -1,9 +1,18 @@
+{{--
+    =====================================================
+    VybeCart - Create User
+    =====================================================
+    Description: Form to add new users to the system with role assignment
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}}
 @extends('layouts.app')
 @section('title', 'Create New User')
 @section('content')
 
 <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6">
-    <!-- Header -->
+    
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-semibold text-gray-800 tracking-tight">Create New User</h2>
         <a href="{{ route('users.index') }}" class="inline-flex items-center px-4 py-2 rounded-xl bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 text-gray-700 font-medium hover:bg-gray-200 transition duration-200">
@@ -12,10 +21,10 @@
         </a>
     </div>
 
-    <!-- Optional Divider -->
+    
     <div class="border-t border-gray-100 my-4"></div>
 
-    <!-- Success/Error Messages -->
+    
     @if(session('success'))
         <div class="mb-6 bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-xl">
             <div class="flex items-center">
@@ -34,12 +43,12 @@
         </div>
     @endif
 
-    <!-- Create User Form -->
+    
     <div class="max-w-2xl mx-auto">
         <form action="{{ route('users.store') }}" method="POST" class="space-y-6">
             @csrf
             
-            <!-- Header Icon -->
+            
             <div class="text-center mb-8">
                 <div class="w-24 h-24 bg-gradient-to-br from-green-100 to-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <i class="ri-user-add-line text-4xl text-green-600"></i>
@@ -48,7 +57,7 @@
                 <p class="text-gray-500">Fill in the details below to create a new user account</p>
             </div>
 
-            <!-- Name Field -->
+            
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
                     <i class="ri-user-line mr-1"></i>Full Name
@@ -65,7 +74,7 @@
                 @enderror
             </div>
 
-            <!-- Email Field -->
+            
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
                     <i class="ri-mail-line mr-1"></i>Email Address
@@ -82,7 +91,7 @@
                 @enderror
             </div>
 
-            <!-- Role Field -->
+            
             <div>
                 <label for="role" class="block text-sm font-medium text-gray-700 mb-2">
                     <i class="ri-admin-line mr-1"></i>User Role
@@ -99,7 +108,7 @@
                 @enderror
             </div>
 
-            <!-- Password Field -->
+            
             <div>
                 <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
                     <i class="ri-lock-line mr-1"></i>Password
@@ -115,7 +124,7 @@
                 @enderror
             </div>
 
-            <!-- Confirm Password Field -->
+            
             <div>
                 <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-2">
                     <i class="ri-lock-line mr-1"></i>Confirm Password
@@ -128,7 +137,7 @@
                        required>
             </div>
 
-            <!-- Password Requirements -->
+            
             <div class="bg-gray-50 rounded-xl p-4">
                 <h4 class="font-medium text-gray-900 mb-2">Password Requirements</h4>
                 <ul class="text-sm text-gray-600 space-y-1">
@@ -143,7 +152,7 @@
                 </ul>
             </div>
 
-            <!-- Action Buttons -->
+            
             <div class="flex justify-end gap-4 pt-6">
                 <a href="{{ route('users.index') }}" class="inline-flex items-center px-6 py-3 border border-gray-300 rounded-xl text-gray-700 hover:bg-gray-50 transition duration-200">
                     <i class="ri-close-line mr-2"></i>

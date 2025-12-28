@@ -1,14 +1,30 @@
+{--
+    =====================================================
+    VybeCart - Search Results
+    =====================================================
+    Description: Product search results display
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}
+{{--
+    =====================================================
+    VybeCart - Search Results
+    =====================================================
+    Description: Product search results display
+    Features: Search filtering, product grid
+    Author: VybeCart Team
+    =====================================================
+--}}
+
 @extends('layouts.master')
 @section('title', 'Search Results')
 @section('content')
-    <!-- Enhanced Search Results Page -->
     <div class="relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-primary-50/30 py-16">
-        <!-- Background Decorations -->
         <div class="absolute -top-20 -right-20 w-64 h-64 bg-gradient-to-br from-primary-100 to-primary-200 rounded-full mix-blend-multiply filter blur-3xl opacity-60"></div>
         <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full mix-blend-multiply filter blur-3xl opacity-60"></div>
         
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Enhanced Search Header -->
             <div class="mb-16 text-center" data-aos="fade-up">
                 <div class="inline-flex items-center px-4 py-2 rounded-full bg-primary-50 border border-primary-200 text-primary-700 text-sm font-semibold mb-6">
                     <i class="ri-search-2-line mr-2"></i>
@@ -33,30 +49,25 @@
             </div>
             
             @if($products->count() > 0)
-                <!-- Enhanced Products Grid -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     @foreach ($products as $index => $product)
                         <div class="group relative" data-aos="fade-up" data-aos-duration="800" data-aos-delay="{{ $index * 100 }}">
                             <div class="card-stack bg-white rounded-3xl shadow-lg overflow-hidden transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-3 hover:rotate-1">
-                                <!-- Product Image Container -->
                                 <div class="relative aspect-square overflow-hidden bg-gray-100">
                                     <img src="{{ asset('images/products/' . $product->photopath) }}" 
                                          alt="{{ $product->name }}"
                                          class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                                     
-                                    <!-- Sale Badge -->
                                     @if ($product->discounted_price != '')
                                         <div class="absolute top-4 left-4 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold uppercase tracking-wider px-3 py-2 rounded-full shadow-lg">
-                                            SALE
+                                            <i class="ri-fire-line mr-1"></i>SALE
                                         </div>
                                     @endif
                                     
-                                    <!-- Category Badge -->
                                     <div class="absolute top-4 right-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white text-xs font-bold uppercase tracking-wider px-3 py-2 rounded-full shadow-lg">
                                         {{ $product->category->name ?? 'General' }}
                                     </div>
                                     
-                                    <!-- Quick Action Overlay -->
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
                                         <div class="flex items-center gap-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                                             <a href="{{ route('viewproduct', $product->id) }}" 
@@ -77,7 +88,6 @@
                                         </div>
                                     </div>
                                     
-                                    <!-- Stock Status -->
                                     @if($product->stock <= 5)
                                         <div class="absolute bottom-4 left-4 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">
                                             Only {{ $product->stock }} left!
@@ -85,7 +95,6 @@
                                     @endif
                                 </div>
                                 
-                                <!-- Product Details -->
                                 <div class="p-6">
                                     <a href="{{ route('viewproduct', $product->id) }}">
                                         <h3 class="font-bold text-gray-900 group-hover:text-primary-600 transition-colors text-lg line-clamp-2 mb-3 leading-tight">
@@ -93,7 +102,6 @@
                                         </h3>
                                     </a>
                                     
-                                    <!-- Rating Stars -->
                                     <div class="flex items-center mb-4">
                                         <div class="flex text-yellow-400 mr-2">
                                             @php $avgRating = $product->averageRating(); @endphp
@@ -114,14 +122,14 @@
                                         @endif
                                     </div>
                                     
-                                    <!-- Price Section -->
                                     <div class="flex items-center justify-between mb-6">
-                                        <div class="flex items-center space-x-2">
+                                        <div class="flex flex-col">
                                             @if ($product->discounted_price != '')
-                                                <span class="text-2xl font-black text-gray-900">${{ $product->discounted_price }}</span>
-                                                <span class="text-sm text-gray-400 line-through">${{ $product->price }}</span>
+                                                <span class="text-2xl font-black text-gray-900">Rs. {{ $product->discounted_price }}</span>
+                                                <span class="text-sm text-gray-400 line-through">Rs. {{ $product->price }}</span>
                                             @else
-                                                <span class="text-2xl font-black text-gray-900">${{ $product->price }}</span>
+                                                <span class="text-2xl font-black text-gray-900">Rs. {{ $product->price }}</span>
+                                                <span class="text-sm text-transparent">spacer</span>
                                             @endif
                                         </div>
                                         @if ($product->discounted_price != '')
@@ -131,7 +139,6 @@
                                         @endif
                                     </div>
                                     
-                                    <!-- Action Button -->
                                     <a href="{{ route('viewproduct', $product->id) }}"
                                        class="w-full inline-block text-center py-3 px-6 rounded-2xl border-2 border-gray-200 text-gray-700 font-semibold 
                                             hover:bg-gradient-to-r hover:from-primary-500 hover:to-primary-600 hover:text-white hover:border-transparent 
@@ -144,7 +151,6 @@
                     @endforeach
                 </div>
                 
-                <!-- Search Stats -->
                 <div class="mt-16 text-center" data-aos="fade-up" data-aos-delay="400">
                     <div class="inline-flex items-center px-8 py-4 bg-white rounded-2xl shadow-lg border border-gray-200">
                         <div class="flex items-center space-x-6">
@@ -163,7 +169,6 @@
                     </div>
                 </div>
             @else
-                <!-- Enhanced No Results State -->
                 <div class="py-20 text-center" data-aos="fade-up" data-aos-delay="100">
                     <div class="max-w-md mx-auto">
                         <div class="inline-flex items-center justify-center w-32 h-32 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 mb-8">
@@ -176,7 +181,6 @@
                         </p>
 
                         
-                        <!-- Search Suggestions -->
                         <div class="bg-gray-50 rounded-2xl p-6 mb-8">
                             <h4 class="font-bold text-gray-900 mb-4">Try searching for:</h4>
                             <div class="flex flex-wrap gap-2 justify-center">

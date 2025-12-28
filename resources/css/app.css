@@ -1,3 +1,29 @@
+/**
+ * =====================================================
+ * VybeCart - Main Application Styles
+ * =====================================================
+ * Description: Entry point for Tailwind CSS framework
+ *              Imports base, components, and utilities
+ * Author: VybeCart Team
+ * Last Modified: 2025-12-28
+ * =====================================================
+ */
+
+/* Import Tailwind's base styles */
+/* This includes CSS reset and default element styles */
 @tailwind base;
+
+/* Import Tailwind's component classes */
+/* This includes pre-built UI components like buttons, cards, etc. */
 @tailwind components;
+
+/* Import Tailwind's utility classes */
+/* This includes all utility classes like flex, grid, text colors, etc. */
 @tailwind utilities;
+
+/* ===================================================
+ * Custom Styles
+ * ===================================================
+ * Add any custom CSS below this section
+ * These styles will override Tailwind's defaults
+ */

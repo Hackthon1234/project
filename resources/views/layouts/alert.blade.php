@@ -1,10 +1,19 @@
+{{--
+    =====================================================
+    VybeCart - Alert Component
+    =====================================================
+    Description: Reusable alert component for success, error, and info messages
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}}
 @if(session('success'))
     <div class="fixed top-6 right-6 z-[9999] max-w-sm transform transition-all duration-500 ease-out animate-slide-in-right" 
          id="success-alert" 
          data-aos="fade-left" 
          data-aos-duration="600">
         <div class="bg-gradient-to-r from-emerald-500 to-green-600 text-white rounded-2xl shadow-2xl border border-white/20 backdrop-blur-sm overflow-hidden">
-            <!-- Alert Header -->
+            
             <div class="px-6 py-4 flex items-center space-x-4">
                 <div class="flex-shrink-0">
                     <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center animate-pulse">
@@ -20,7 +29,7 @@
                     <i class="ri-close-line text-lg text-white group-hover:rotate-90 transition-transform duration-200"></i>
                 </button>
             </div>
-            <!-- Progress Bar -->
+            
             <div class="h-1 bg-white/20">
                 <div class="h-full bg-white/60 rounded-full animate-progress" style="animation-duration: 5s;"></div>
             </div>
@@ -34,7 +43,7 @@
          data-aos="fade-left" 
          data-aos-duration="600">
         <div class="bg-gradient-to-r from-red-500 to-rose-600 text-white rounded-2xl shadow-2xl border border-white/20 backdrop-blur-sm overflow-hidden">
-            <!-- Alert Header -->
+            
             <div class="px-6 py-4 flex items-center space-x-4">
                 <div class="flex-shrink-0">
                     <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center animate-bounce-slow">
@@ -50,7 +59,7 @@
                     <i class="ri-close-line text-lg text-white group-hover:rotate-90 transition-transform duration-200"></i>
                 </button>
             </div>
-            <!-- Progress Bar -->
+            
             <div class="h-1 bg-white/20">
                 <div class="h-full bg-white/60 rounded-full animate-progress" style="animation-duration: 5s;"></div>
             </div>
@@ -64,7 +73,7 @@
          data-aos="fade-left" 
          data-aos-duration="600">
         <div class="bg-gradient-to-r from-orange-500 to-red-600 text-white rounded-2xl shadow-2xl border border-white/20 backdrop-blur-sm overflow-hidden">
-            <!-- Alert Header -->
+            
             <div class="px-6 py-4 flex items-center space-x-4">
                 <div class="flex-shrink-0">
                     <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center animate-wiggle">
@@ -80,7 +89,7 @@
                     <i class="ri-close-line text-lg text-white group-hover:rotate-90 transition-transform duration-200"></i>
                 </button>
             </div>
-            <!-- Progress Bar -->
+            
             <div class="h-1 bg-white/20">
                 <div class="h-full bg-white/60 rounded-full animate-progress" style="animation-duration: 5s;"></div>
             </div>
@@ -94,7 +103,7 @@
          data-aos="fade-left" 
          data-aos-duration="600">
         <div class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-2xl shadow-2xl border border-white/20 backdrop-blur-sm overflow-hidden">
-            <!-- Alert Header -->
+            
             <div class="px-6 py-4 flex items-center space-x-4">
                 <div class="flex-shrink-0">
                     <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center animate-pulse">
@@ -110,7 +119,7 @@
                     <i class="ri-close-line text-lg text-white group-hover:rotate-90 transition-transform duration-200"></i>
                 </button>
             </div>
-            <!-- Progress Bar -->
+            
             <div class="h-1 bg-white/20">
                 <div class="h-full bg-white/60 rounded-full animate-progress" style="animation-duration: 5s;"></div>
             </div>
@@ -122,7 +131,6 @@
     function closeAlert(alertId) {
         const alert = document.getElementById(alertId);
         if (alert) {
-            // Add exit animation
             alert.style.transform = 'translateX(100%) scale(0.8)';
             alert.style.opacity = '0';
             setTimeout(() => {
@@ -133,26 +141,22 @@
         }
     }
 
-    // Enhanced auto-close with stacking support
     document.addEventListener('DOMContentLoaded', function() {
         const alerts = document.querySelectorAll('[id$="-alert"]');
         let topOffset = 24; // Start with 6 units (1.5rem)
 
         alerts.forEach((alert, index) => {
-            // Stack alerts if multiple exist
             if (index > 0) {
                 alert.style.top = `${topOffset}px`;
                 topOffset += alert.offsetHeight + 16; // Add alert height + gap
             }
 
-            // Auto-close after 5 seconds with smooth animation
             setTimeout(() => {
                 if (document.getElementById(alert.id)) {
                     closeAlert(alert.id);
                 }
             }, 5000);
 
-            // Add hover to pause auto-close
             let autoCloseTimer;
             const resetTimer = () => {
                 clearTimeout(autoCloseTimer);
@@ -175,9 +179,7 @@
         });
     });
 
-    // Add sound effect (optional)
     function playAlertSound(type) {
-        // Create audio context for modern browsers
         if (typeof AudioContext !== 'undefined' || typeof webkitAudioContext !== 'undefined') {
             const audioContext = new (AudioContext || webkitAudioContext)();
             const oscillator = audioContext.createOscillator();
@@ -186,7 +188,6 @@
             oscillator.connect(gainNode);
             gainNode.connect(audioContext.destination);
             
-            // Different tones for different alert types
             const frequencies = {
                 success: 800,
                 error: 400,

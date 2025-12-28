@@ -1,9 +1,18 @@
+{{--
+    =====================================================
+    VybeCart - Orders Management
+    =====================================================
+    Description: Admin panel to view and manage all customer orders
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}}
 @extends('layouts.app')
 @section('title', 'Orders')
 @section('content')
 
 <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6">
-    <!-- Header -->
+    
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-semibold text-gray-800 tracking-tight">Orders Management</h2>
         <div class="inline-flex items-center px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-50 to-blue-50 border border-indigo-200 text-indigo-700 text-sm font-semibold">
@@ -12,10 +21,10 @@
         </div>
     </div>
 
-    <!-- Optional Divider -->
+    
     <div class="border-t border-gray-100 my-4"></div>
 
-    <!-- Orders Table -->
+    
     <div class="overflow-x-auto">
         <table class="w-full divide-y divide-gray-200">
             <thead class="bg-gradient-to-r from-indigo-50 to-blue-50">
@@ -32,13 +41,13 @@
             <tbody class="bg-white divide-y divide-gray-200">
                 @foreach($orders as $order)
                 <tr class="hover:bg-blue-50/50 transition-colors duration-150">
-                    <!-- Order Date -->
+                    
                     <td class="px-6 py-4 whitespace-nowrap text-center">
                         <div class="text-sm font-medium text-gray-900">{{ $order->created_at->format('M d, Y') }}</div>
                         <div class="text-xs text-gray-500">{{ $order->created_at->format('h:i A') }}</div>
                     </td>
                     
-                    <!-- Product Info -->
+                    
                     <td class="px-6 py-4">
                         <div class="flex items-center space-x-4">
                             <img src="{{ asset('/images/products/'.$order->product->photopath) }}" 
@@ -46,26 +55,26 @@
                                  class="h-16 w-16 rounded-lg shadow-sm object-cover flex-shrink-0">
                             <div class="min-w-0">
                                 <div class="text-sm font-medium text-gray-900 line-clamp-2">{{ $order->product->name }}</div>
-                                <div class="text-xs text-gray-500">Price: ${{ number_format($order->product->price) }}</div>
+                                <div class="text-xs text-gray-500">Price: Rs. {{ number_format($order->product->price) }}</div>
                                 <div class="text-xs text-gray-500">Qty: {{ $order->quantity }}</div>
                             </div>
                         </div>
                     </td>
                     
-                    <!-- Customer Info -->
+                    
                     <td class="px-6 py-4">
                         <div class="text-sm font-medium text-gray-900 truncate">{{ $order->name }}</div>
                         <div class="text-xs text-gray-500 truncate">{{ $order->phone }}</div>
                         <div class="text-xs text-gray-500 truncate">{{ $order->address }}</div>
                     </td>
                     
-                    <!-- Amount -->
+                    
                     <td class="px-6 py-4 whitespace-nowrap text-center">
-                        <div class="text-sm font-bold text-gray-900">${{ number_format($order->price * $order->quantity) }}</div>
-                        <div class="text-xs text-gray-500">{{ $order->quantity }} × ${{ number_format($order->price) }}</div>
+                        <div class="text-sm font-bold text-gray-900">Rs. {{ number_format($order->price * $order->quantity) }}</div>
+                        <div class="text-xs text-gray-500">{{ $order->quantity }} × Rs. {{ number_format($order->price) }}</div>
                     </td>
                     
-                    <!-- Payment Info -->
+                    
                     <td class="px-6 py-4 whitespace-nowrap text-center">
                         <div class="text-xs text-gray-500 mb-1">{{ $order->payment_method ?? 'N/A' }}</div>
                         <div class="flex justify-center">
@@ -79,7 +88,7 @@
                         </div>
                     </td>
                     
-                    <!-- Order Status -->
+                    
                     <td class="px-6 py-4 whitespace-nowrap text-center">
                         <div class="flex justify-center">
                             <span class="px-3 py-1 text-xs rounded-full font-medium
@@ -93,7 +102,7 @@
                         </div>
                     </td>
                     
-                    <!-- Actions -->
+                    
                     <td class="px-6 py-4">
                         <div class="grid grid-cols-2 gap-2 max-w-xs mx-auto">
                             <a href="{{route('orders.status',[$order->id,'Pending'])}}" 

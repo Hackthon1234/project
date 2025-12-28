@@ -1,9 +1,26 @@
+{--
+    =====================================================
+    VybeCart - My Orders
+    =====================================================
+    Description: Order history and tracking interface
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}
+{{--
+    =====================================================
+    VybeCart - My Orders
+    =====================================================
+    Description: User order history and tracking
+    Features: Order details, status tracking, reorder
+    Author: VybeCart Team
+    =====================================================
+--}}
+
 @extends('layouts.master')
 @section('title', 'My Orders')
 @section('content')
-    <!-- Enhanced Orders Header -->
     <div class="relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-700 to-purple-800 text-white py-24">
-        <!-- Background Decorations -->
         <div class="absolute -top-20 -right-20 w-96 h-96 bg-gradient-to-br from-white/10 to-white/5 rounded-full mix-blend-overlay filter blur-3xl"></div>
         <div class="absolute -bottom-20 -left-20 w-96 h-96 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full mix-blend-overlay filter blur-3xl"></div>
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full">
@@ -23,7 +40,6 @@
                     Track and manage all your orders in one convenient place
                 </p>
                 
-                <!-- Quick Stats -->
                 @if(!$orders->isEmpty())
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-16" data-aos="fade-up" data-aos-delay="200">
                         <div class="text-center">
@@ -35,7 +51,7 @@
                             <div class="text-white/70 text-sm uppercase tracking-wider">Delivered</div>
                         </div>
                         <div class="text-center">
-                            <div class="text-4xl font-black text-yellow-300">${{ $orders->sum(function($order) { return $order->quantity * $order->price; }) }}</div>
+                            <div class="text-4xl font-black text-yellow-300">Rs. {{ $orders->sum(function($order) { return $order->quantity * $order->price; }) }}</div>
                             <div class="text-white/70 text-sm uppercase tracking-wider">Total Spent</div>
                         </div>
                     </div>
@@ -44,15 +60,12 @@
         </div>
     </div>
     
-    <!-- Enhanced Orders Content -->
     <div class="relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-primary-50/30 py-16">
-        <!-- Background Decorations -->
         <div class="absolute top-20 right-20 w-64 h-64 bg-gradient-to-br from-primary-100 to-primary-200 rounded-full mix-blend-multiply filter blur-3xl opacity-60"></div>
         <div class="absolute bottom-20 left-20 w-64 h-64 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full mix-blend-multiply filter blur-3xl opacity-60"></div>
         
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             @if($orders->isEmpty())
-                <!-- Enhanced Empty State -->
                 <div class="py-32 text-center" data-aos="fade-up">
                     <div class="max-w-md mx-auto">
                         <div class="inline-flex items-center justify-center w-32 h-32 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 mb-8">
@@ -64,7 +77,6 @@
                             Start exploring our amazing products!
                         </p>
                         
-                        <!-- Call to Action -->
                         <div class="flex flex-col sm:flex-row gap-4 justify-center">
                             <a href="/" class="btn-primary inline-flex items-center px-8 py-4">
                                 <i class="ri-shopping-cart-2-line mr-2"></i>
@@ -78,7 +90,6 @@
                     </div>
                 </div>
             @else
-                <!-- Filter and Search -->
                 <div class="mb-12" data-aos="fade-up">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
                         <div>
@@ -86,7 +97,6 @@
                             <p class="text-gray-600">{{ $orders->count() }} orders found</p>
                         </div>
                         
-                        <!-- Filter Buttons -->
                         <div class="flex flex-wrap gap-3">
                             <button class="px-4 py-2 bg-primary-500 text-white rounded-xl font-semibold text-sm hover:bg-primary-600 transition-colors">
                                 All Orders
@@ -101,17 +111,14 @@
                     </div>
                 </div>
                 
-                <!-- Enhanced Orders List -->
                 <div class="space-y-6">
                     @foreach ($orders as $index => $order)
                         <div class="card-stack bg-white rounded-3xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-1" 
                              data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
                             <div class="p-8">
                                 <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-                                    <!-- Order Info & Product -->
                                     <div class="flex-1">
                                         <div class="flex flex-col sm:flex-row sm:items-start gap-6">
-                                            <!-- Product Image & Details -->
                                             <div class="flex items-center space-x-4">
                                                 <div class="relative">
                                                     <img src="{{ asset('images/products/' . $order->product->photopath) }}" 
@@ -138,21 +145,17 @@
                                         </div>
                                     </div>
                                     
-                                    <!-- Order Details Grid -->
                                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-                                        <!-- Price -->
                                         <div class="text-center lg:text-left">
                                             <div class="text-sm text-gray-500 mb-1">Unit Price</div>
-                                            <div class="text-2xl font-black text-gray-900">${{ $order->price }}</div>
+                                            <div class="text-2xl font-black text-gray-900">Rs. {{ $order->price }}</div>
                                         </div>
                                         
-                                        <!-- Total -->
                                         <div class="text-center lg:text-left">
                                             <div class="text-sm text-gray-500 mb-1">Total Amount</div>
-                                            <div class="text-2xl font-black text-primary-600">${{ $order->quantity * $order->price }}</div>
+                                            <div class="text-2xl font-black text-primary-600">Rs. {{ $order->quantity * $order->price }}</div>
                                         </div>
                                         
-                                        <!-- Payment Status -->
                                         <div class="text-center lg:text-left">
                                             <div class="text-sm text-gray-500 mb-2">Payment</div>
                                             <div class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold
@@ -162,7 +165,6 @@
                                             </div>
                                         </div>
                                         
-                                        <!-- Order Status -->
                                         <div class="text-center lg:text-left">
                                             <div class="text-sm text-gray-500 mb-2">Status</div>
                                             <div class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold
@@ -182,15 +184,12 @@
                                     </div>
                                 </div>
                                 
-                                <!-- Action Buttons -->
                                 <div class="mt-8 pt-6 border-t border-gray-100">
                                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                                        <!-- Order ID -->
                                         <div class="text-sm text-gray-500">
                                             Order ID: <span class="font-mono font-semibold text-gray-700">#{{ str_pad($order->id, 6, '0', STR_PAD_LEFT) }}</span>
                                         </div>
                                         
-                                        <!-- Actions -->
                                         <div class="flex flex-wrap gap-3">
                                             @if($order->order_status == 'Pending')
                                                 <form action="{{ route('order.cancel', $order->id) }}" method="POST" class="inline">
@@ -226,7 +225,7 @@
                     @endforeach
                 </div>
                 
-                <!-- Order Summary Card -->
+                
                 <div class="mt-16" data-aos="fade-up" data-aos-delay="200">
                     <div class="card-stack bg-gradient-to-r from-primary-50 to-purple-50 rounded-3xl shadow-lg p-8 border border-primary-100">
                         <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
@@ -248,7 +247,7 @@
                                 <div class="text-gray-600 font-semibold">Pending</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-3xl font-black text-purple-600 mb-2">${{ $orders->sum(function($order) { return $order->quantity * $order->price; }) }}</div>
+                                <div class="text-3xl font-black text-purple-600 mb-2">Rs. {{ $orders->sum(function($order) { return $order->quantity * $order->price; }) }}</div>
                                 <div class="text-gray-600 font-semibold">Total Spent</div>
                             </div>
                         </div>

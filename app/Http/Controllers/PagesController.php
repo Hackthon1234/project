@@ -13,7 +13,16 @@ class PagesController extends Controller
     public function index()
     {
         $latestproducts = Product::with(['reviews', 'category'])->latest()->take(4)->get();
-        return view('welcome', compact('latestproducts'));
+        
+        // Fetch top 7 trending products ordered by average rating (highest to lowest)
+        $trendingProducts = Product::with(['reviews', 'category'])
+            ->whereHas('reviews') // Only include products with reviews
+            ->withCount('reviews')
+            ->orderByRaw('(SELECT AVG(rating) FROM reviews WHERE reviews.product_id = products.id) DESC')
+            ->take(7)
+            ->get();
+            
+        return view('welcome', compact('latestproducts', 'trendingProducts'));
     }
     public function viewProduct($id)
     {

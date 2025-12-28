@@ -1,27 +1,37 @@
+{--
+    =====================================================
+    VybeCart - Product Detail Page
+    =====================================================
+    Description: Detailed product view with reviews and cart functionality
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}
+{{--
+    =====================================================
+    VybeCart - Product Detail Page
+    =====================================================
+    Description: Detailed product view with image gallery,
+                 reviews, ratings, and cart functionality
+    Features: Product details, add to cart, reviews system,
+              wishlist toggle, quantity selector
+    Author: VybeCart Team
+    =====================================================
+--}}
+
 @extends('layouts.master')
 @section('title', $product->name)
 @section('content')
-    <!-- Enhanced Product View Page -->
+    
+    {{-- ===================================
+         Product View Header
+         ===================================
+    --}}
     <div class="relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-primary-50/30 py-8">
-        <!-- Background Decorations -->
         <div class="absolute -top-20 -right-20 w-64 h-64 bg-gradient-to-br from-primary-100 to-primary-200 rounded-full mix-blend-multiply filter blur-3xl opacity-60"></div>
-        <div        function resetModal() {
-            document.getElementById('reviewForm').reset();
-            document.getElementById('reviewForm').action = '/reviews';
-            document.getElementById('reviewId').value = '';
-            document.getElementById('selectedRating').value = '';
-            document.getElementById('reviewText').value = '';
-            document.getElementById('reviewModalTitle').textContent = 'Write a Review';
-            document.getElementById('submitButtonText').textContent = 'Submit Review';
-            document.getElementById('reviewMethod').value = 'POST';
-            currentRating = 0;
-            isEditing = false;
-            editingReviewId = null;
-            updateStarDisplay();
-        }te -bottom-20 -left-20 w-64 h-64 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full mix-blend-multiply filter blur-3xl opacity-60"></div>
+        <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full mix-blend-multiply filter blur-3xl opacity-60"></div>
         
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Enhanced Back Navigation -->
             <div class="mb-8" data-aos="fade-up">
                 <a href="{{ route('categoryproducts', $product->category->id) }}" 
                    class="group inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full text-gray-700 hover:text-primary-600 transition-all duration-200 shadow-md hover:shadow-lg border border-gray-200">
@@ -30,29 +40,24 @@
                 </a>
             </div>
             
-            <!-- Enhanced Product Container -->
             <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100" data-aos="fade-up" data-aos-delay="100">
                 <div class="grid lg:grid-cols-2 gap-0">
-                    <!-- Enhanced Product Image Section -->
                     <div class="relative bg-gradient-to-br from-gray-50 to-gray-100 p-8">
                         <div class="relative aspect-square overflow-hidden rounded-2xl bg-white shadow-lg group">
                             <img src="{{ asset('images/products/' . $product->photopath) }}" 
                                  alt="{{ $product->name }}"
                                  class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                             
-                            <!-- Enhanced Sale Badge -->
                             @if ($product->discounted_price != '')
                                 <div class="absolute top-6 right-6 bg-gradient-to-r from-red-500 to-pink-500 text-white text-sm font-bold uppercase tracking-wider px-4 py-2 rounded-full shadow-lg animate-pulse">
                                     <i class="ri-fire-line mr-1"></i>SALE
                                 </div>
                             @endif
                             
-                            <!-- New Badge -->
                             <div class="absolute top-6 left-6 bg-gradient-to-r from-primary-500 to-primary-600 text-white text-xs font-bold uppercase tracking-wider px-3 py-2 rounded-full shadow-lg">
                                 NEW
                             </div>
                             
-                            <!-- Stock Status -->
                             @if($product->stock <= 5)
                                 <div class="absolute bottom-6 left-6 bg-orange-500 text-white text-sm font-bold px-3 py-2 rounded-full">
                                     Only {{ $product->stock }} left!
@@ -61,30 +66,26 @@
                         </div>
                     </div>
                     
-                    <!-- Enhanced Product Details Section -->
                     <div class="p-8 lg:p-12 space-y-8">
-                        <!-- Product Title & Category -->
                         <div>
                             <div class="inline-flex items-center px-3 py-1 rounded-full bg-primary-50 text-primary-600 text-sm font-medium mb-4">
                                 {{ $product->category->name }}
                             </div>
                             <h1 class="text-3xl lg:text-4xl font-black text-gray-900 mb-4 leading-tight">{{ $product->name }}</h1>
                             
-                            <!-- Enhanced Price Display -->
                             <div class="flex items-center space-x-4 mb-6">
                                 @if ($product->discounted_price != '')
-                                    <span class="text-4xl font-black text-gray-900">${{ $product->discounted_price }}</span>
-                                    <span class="text-xl text-gray-400 line-through">${{ $product->price }}</span>
+                                    <span class="text-4xl font-black text-gray-900">Rs. {{ $product->discounted_price }}</span>
+                                    <span class="text-xl text-gray-400 line-through">Rs. {{ $product->price }}</span>
                                     <span class="inline-flex items-center px-3 py-1 rounded-full bg-gradient-to-r from-red-500 to-pink-500 text-white text-sm font-bold">
                                         {{ number_format((($product->price - $product->discounted_price) / $product->price) * 100) }}% OFF
                                     </span>
                                 @else
-                                    <span class="text-4xl font-black text-gray-900">${{ $product->price }}</span>
+                                    <span class="text-4xl font-black text-gray-900">Rs. {{ $product->price }}</span>
                                 @endif
                             </div>
                         </div>
                         
-                        <!-- Enhanced Description -->
                         <div class="border-t border-gray-200 pt-8">
                             <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
                                 <i class="ri-file-text-line mr-2 text-primary-500"></i>
@@ -93,7 +94,6 @@
                             <p class="text-gray-600 leading-relaxed text-lg">{{ $product->description }}</p>
                         </div>
                         
-                        <!-- Enhanced Product Info Grid -->
                         <div class="grid grid-cols-2 gap-4">
                             <div class="bg-gradient-to-br from-primary-50 to-primary-100 p-4 rounded-2xl border border-primary-200">
                                 <div class="flex items-center mb-2">
@@ -112,12 +112,10 @@
                             </div>
                         </div>
                         
-                        <!-- Enhanced Add to Cart Form -->
                         <form class="space-y-6 border-t border-gray-200 pt-8" action="{{ route('cart.store') }}" method="POST">
                             @csrf
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
                             
-                            <!-- Quantity Selector -->
                             <div>
                                 <label for="quantity" class="block text-lg font-bold text-gray-900 mb-4">
                                     <i class="ri-add-box-line mr-2 text-primary-500"></i>
@@ -140,7 +138,6 @@
                                 </div>
                             </div>
                             
-                            <!-- Enhanced Action Buttons -->
                             <div class="flex flex-col sm:flex-row gap-4">
                                 <button type="submit" class="flex-1 group relative overflow-hidden bg-gradient-to-r from-primary-500 to-primary-600 text-white py-4 px-8 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">
                                     <span class="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
@@ -172,7 +169,6 @@
                                 @endauth
                             </div>
                             
-                            <!-- Trust Badges -->
                             <div class="grid grid-cols-3 gap-4 pt-6 border-t border-gray-200">
                                 <div class="text-center">
                                     <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
@@ -200,16 +196,12 @@
         </div>
     </div>
 
-    <!-- Enhanced Reviews Section -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
-            <!-- Reviews Header -->
             <div class="bg-gradient-to-r from-primary-50 to-primary-100 px-8 py-6 border-b border-primary-200">
                 <h2 class="text-3xl font-black text-gray-900 mb-4">Customer Reviews</h2>
                 
-                <!-- Rating Summary -->
                 <div class="grid lg:grid-cols-2 gap-8">
-                    <!-- Overall Rating -->
                     <div class="flex items-center space-x-6">
                         <div class="text-center">
                             <div class="text-6xl font-black text-gray-900">{{ number_format($product->averageRating(), 1) }}</div>
@@ -228,7 +220,6 @@
                         </div>
                     </div>
                     
-                    <!-- Rating Distribution -->
                     <div class="space-y-2">
                         @php $distribution = $product->ratingDistribution(); @endphp
                         @for($i = 5; $i >= 1; $i--)
@@ -246,7 +237,6 @@
                 </div>
             </div>
             
-            <!-- Add Review Button -->
             <div class="px-8 py-6 border-b border-gray-200">
                 @auth
                     @if($product->canUserReview(auth()->id()))
@@ -268,13 +258,11 @@
                 @endauth
             </div>
             
-            <!-- Reviews List -->
             <div class="px-8 py-6" id="reviewsList">
                 @forelse($product->reviews()->latest()->get() as $review)
                     <div class="border-b border-gray-200 pb-6 mb-6 last:border-b-0 last:mb-0" data-review-id="{{ $review->id }}">
                         <div class="flex items-start justify-between mb-4">
                             <div class="flex items-center space-x-4">
-                                <!-- User Avatar -->
                                 <div class="w-12 h-12 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
                                     {{ strtoupper(substr($review->user->name, 0, 1)) }}
                                 </div>
@@ -302,7 +290,6 @@
                                 </div>
                             </div>
                             
-                            <!-- Review Actions (for review owner) -->
                             @auth
                                 @if($review->user_id === auth()->id())
                                     <div class="flex space-x-2">
@@ -340,7 +327,6 @@
         </div>
     </div>
 
-    <!-- Review Modal -->
     <div id="reviewModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-md w-full p-6 transform transition-all duration-300 scale-95" id="reviewModalContent">
             <h3 class="text-2xl font-bold text-gray-900 mb-6" id="reviewModalTitle">Write a Review</h3>
@@ -351,7 +337,6 @@
                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                 <input type="hidden" name="review_id" id="reviewId">
                 
-                <!-- Star Rating -->
                 <div class="mb-6">
                     <label class="block text-sm font-bold text-gray-900 mb-3">Rating</label>
                     <div class="flex space-x-1" id="starRating">
@@ -365,7 +350,6 @@
                     <input type="hidden" name="rating" id="selectedRating" required>
                 </div>
                 
-                <!-- Review Text -->
                 <div class="mb-6">
                     <label for="reviewText" class="block text-sm font-bold text-gray-900 mb-3">Review (Optional)</label>
                     <textarea name="review" id="reviewText" rows="4" 
@@ -373,7 +357,6 @@
                               placeholder="Share your experience with this product..."></textarea>
                 </div>
                 
-                <!-- Modal Actions -->
                 <div class="flex space-x-3">
                     <button type="button" onclick="closeReviewModal()" 
                             class="flex-1 bg-gray-200 text-gray-800 py-3 px-4 rounded-xl font-bold hover:bg-gray-300 transition-colors duration-200">
@@ -395,7 +378,6 @@
             let currentValue = parseInt(quantity.value);
             if (currentValue < {{$product->stock}}) {
                 quantity.value = currentValue + 1;
-                // Add animation effect
                 quantity.classList.add('animate-pulse');
                 setTimeout(() => quantity.classList.remove('animate-pulse'), 200);
             }
@@ -405,13 +387,11 @@
             let currentValue = parseInt(quantity.value);
             if (currentValue > 1) {
                 quantity.value = currentValue - 1;
-                // Add animation effect
                 quantity.classList.add('animate-pulse');
                 setTimeout(() => quantity.classList.remove('animate-pulse'), 200);
             }
         }
         
-        // Add validation to quantity input
         quantity.addEventListener('input', function() {
             let value = parseInt(this.value);
             if (isNaN(value) || value < 1) {
@@ -421,7 +401,6 @@
             }
         });
 
-        // Review Modal Functions
         let currentRating = 0;
         let isEditing = false;
         let editingReviewId = null;
@@ -434,7 +413,6 @@
         }
 
         function openNewReviewModal() {
-            // Reset modal for new review
             resetModal();
             openReviewModal();
         }
@@ -442,24 +420,11 @@
         function closeReviewModal() {
             document.getElementById('reviewModal').classList.add('hidden');
             document.getElementById('reviewModal').classList.remove('flex');
-            // Only reset if not editing, or reset after modal is closed
             setTimeout(() => {
                 resetModal();
             }, 300); // Small delay for animation
         }
 
-        function resetModal() {
-            document.getElementById('reviewForm').reset();
-            document.getElementById('reviewId').value = '';
-            document.getElementById('selectedRating').value = '';
-            document.getElementById('reviewText').value = '';
-            document.getElementById('reviewModalTitle').textContent = 'Write a Review';
-            document.getElementById('submitButtonText').textContent = 'Submit Review';
-            currentRating = 0;
-            isEditing = false;
-            editingReviewId = null;
-            updateStarDisplay();
-        }
 
         function setRating(rating) {
             currentRating = rating;
@@ -484,27 +449,22 @@
         }
 
         function editReview(reviewId, rating, reviewText) {
-            console.log('Editing review:', reviewId, rating, reviewText); // Debug log
+            console.log('Editing review:', reviewId, rating, reviewText);
             
             isEditing = true;
             editingReviewId = reviewId;
             
-            // Set form data
             document.getElementById('reviewId').value = reviewId;
             document.getElementById('reviewModalTitle').textContent = 'Edit Review';
             document.getElementById('submitButtonText').textContent = 'Update Review';
             
-            // Set up form for PUT request
             document.getElementById('methodField').innerHTML = '<input type="hidden" name="_method" value="PUT">';
             document.getElementById('reviewForm').action = `/reviews/${reviewId}`;
             
-            // Set the review text
             document.getElementById('reviewText').value = reviewText || '';
             
-            // Set the rating
             setRating(parseInt(rating));
             
-            // Open modal
             openReviewModal();
         }
 
@@ -517,7 +477,6 @@
             document.getElementById('reviewModalTitle').textContent = 'Write a Review';
             document.getElementById('submitButtonText').textContent = 'Submit Review';
             
-            // Clear method field for POST request
             document.getElementById('methodField').innerHTML = '';
             
             currentRating = 0;
@@ -526,24 +485,20 @@
             updateStarDisplay();
         }
 
-        // Handle review form submission
         document.getElementById('reviewForm').addEventListener('submit', function(e) {
             if (currentRating === 0) {
                 e.preventDefault();
                 alert('Please select a rating');
                 return;
             }
-            // Form will submit normally with redirect and alert messages
         });
 
-        // Close modal when clicking outside
         document.getElementById('reviewModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeReviewModal();
             }
         });
 
-        // Toggle wishlist function
         function toggleWishlist(productId, button) {
             const icon = button.querySelector('i');
             const buttonText = button.childNodes[button.childNodes.length - 1];
@@ -566,18 +521,15 @@
             .then(data => {
                 if (data.success) {
                     if (isInWishlist) {
-                        // Remove from wishlist
                         icon.className = 'ri-heart-line mr-2 group-hover:ri-heart-fill';
                         buttonText.textContent = 'Add to Wishlist';
                         button.classList.remove('text-red-500');
                     } else {
-                        // Add to wishlist
                         icon.className = 'ri-heart-fill mr-2 text-red-500';
                         buttonText.textContent = 'Remove from Wishlist';
                         button.classList.add('text-red-500');
                     }
                     
-                    // Update wishlist count in navigation if it exists
                     const wishlistCountElement = document.getElementById('user-wishlist-count');
                     if (wishlistCountElement) {
                         const currentCount = parseInt(wishlistCountElement.getAttribute('data-count')) || 0;

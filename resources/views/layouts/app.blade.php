@@ -1,3 +1,12 @@
+{{--
+    =====================================================
+    VybeCart - Admin Layout Template
+    =====================================================
+    Description: Main layout for admin panel with sidebar navigation, header, and footer
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -8,19 +17,19 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
+    
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
 
-    <!-- Scripts -->
+    
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="font-sans antialiased">
     @include('layouts.alert')
     <div class="flex min-h-screen bg-gray-50">
-        <!-- Sidebar -->
+        
         <div class="w-56 bg-gradient-to-b from-indigo-800 to-indigo-900 h-screen sticky top-0 shadow-xl">
             <div class="p-4 flex justify-center">
                 <img src="{{ asset('app1.png') }}" alt="Logo" class="h-25 object-contain">
@@ -64,14 +73,14 @@
             </nav>
         </div>
 
-        <!-- Main Content -->
+        
         <div class="flex-1 overflow-auto">
-            <!-- Header -->
+            
             <header class="bg-white border-b border-gray-200 px-8 py-6">
                 <h1 class="text-2xl font-bold text-gray-800">@yield('title')</h1>
             </header>
 
-            <!-- Content -->
+            
             <main class="p-8">
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                     @yield('content')

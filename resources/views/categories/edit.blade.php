@@ -1,13 +1,22 @@
+{{--
+    =====================================================
+    VybeCart - Edit Category
+    =====================================================
+    Description: Form to update existing category details
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}}
 @extends('layouts.app')
 
 @section('title', 'Edit Category')
 
 @section('content')
-<div class="max-w-lg mx-auto p-6"> <!-- Increased width by 1.5x -->
+<div class="max-w-lg mx-auto p-6"> 
     <form action="{{ route('categories.update',$category->id) }}" method="POST" 
-          class="bg-white rounded-xl shadow-lg border border-gray-200 p-8"> <!-- Increased padding -->
+          class="bg-white rounded-xl shadow-lg border border-gray-200 p-8"> 
         
-        <!-- Header -->
+        
         <div class="mb-8 text-center">
             <div class="bg-indigo-100 w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-4">
                 <i class="ri-folder-add-line text-2xl text-indigo-600"></i>
@@ -17,7 +26,7 @@
 
         @csrf
         
-        <!-- Order Field -->
+        
         <div class="mb-6">
             <label for="order" class="block text-sm font-medium text-gray-700 mb-2">
                 <i class="ri-numbers-line mr-2 text-indigo-500"></i> Display Order
@@ -32,7 +41,7 @@
             @enderror
         </div>
 
-        <!-- Name Field -->
+        
         <div class="mb-8">
             <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
                 <i class="ri-price-tag-3-line mr-2 text-indigo-500"></i> Category Name
@@ -47,7 +56,7 @@
             @enderror
         </div>
 
-        <!-- Form Actions -->
+        
         <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200">
             <a href="{{ route('categories.index') }}" 
                class="px-5 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-200">

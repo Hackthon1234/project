@@ -1,3 +1,12 @@
+{{--
+    =====================================================
+    VybeCart - Responsive Nav Link
+    =====================================================
+    Description: Mobile-responsive navigation link component
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}}
 @props(['active'])
 
 @php

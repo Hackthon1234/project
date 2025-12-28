@@ -1,9 +1,18 @@
+{{--
+    =====================================================
+    VybeCart - Users Management
+    =====================================================
+    Description: Admin panel to manage all users, roles, and permissions
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}}
 @extends('layouts.app')
 @section('title', 'Users')
 @section('content')
 
 <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6">
-    <!-- Header -->
+    
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-semibold text-gray-800 tracking-tight">Users Management</h2>
         <div class="flex items-center gap-4">
@@ -18,10 +27,10 @@
         </div>
     </div>
 
-    <!-- Optional Divider -->
+    
     <div class="border-t border-gray-100 my-4"></div>
 
-    <!-- Success/Error Messages -->
+    
     @if(session('success'))
         <div class="mb-6 bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-xl">
             <div class="flex items-center">
@@ -40,7 +49,7 @@
         </div>
     @endif
 
-    <!-- Users Table -->
+    
     <div class="overflow-x-auto">
         <table class="w-full divide-y divide-gray-200">
             <thead class="bg-gradient-to-r from-indigo-50 to-blue-50">
@@ -56,12 +65,12 @@
             <tbody class="bg-white divide-y divide-gray-200">
                 @foreach($users as $user)
                 <tr class="hover:bg-blue-50/50 transition-colors duration-150" data-user-id="{{ $user->id }}">
-                    <!-- User ID -->
+                    
                     <td class="px-6 py-4 whitespace-nowrap text-center">
                         <div class="text-sm font-medium text-gray-900">#{{ $user->id }}</div>
                     </td>
                     
-                    <!-- User Info -->
+                    
                     <td class="px-6 py-4">
                         <div class="flex items-center space-x-4">
                             <div class="w-12 h-12 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
@@ -85,7 +94,7 @@
                         </div>
                     </td>
                     
-                    <!-- Role -->
+                    
                     <td class="px-6 py-4 whitespace-nowrap text-center">
                         <div class="flex justify-center">
                             <span class="role-badge inline-flex items-center px-2 py-1 rounded-full text-xs font-medium
@@ -98,7 +107,7 @@
                         </div>
                     </td>
                     
-                    <!-- Status -->
+                    
                     <td class="px-6 py-4 whitespace-nowrap text-center">
                         <div class="flex justify-center">
                             <span class="px-3 py-1 text-xs rounded-full font-medium
@@ -110,13 +119,13 @@
                         </div>
                     </td>
                     
-                    <!-- Registration Date -->
+                    
                     <td class="px-6 py-4 whitespace-nowrap text-center">
                         <div class="text-sm text-gray-900">{{ $user->created_at->format('M d, Y') }}</div>
                         <div class="text-xs text-gray-500">{{ $user->created_at->format('h:i A') }}</div>
                     </td>
                     
-                    <!-- Actions -->
+                    
                     <td class="px-6 py-4">
                         <div class="flex justify-center gap-2">
                             <button onclick="toggleUserRole({{ $user->id }}, '{{ $user->role ?? 'user' }}')"
@@ -159,7 +168,7 @@
         @endif
     </div>
 
-    <!-- User Statistics -->
+    
     <div class="mt-8 grid grid-cols-1 sm:grid-cols-4 gap-4">
         <div class="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-xl p-4 border border-indigo-200">
             <div class="flex items-center">
@@ -211,9 +220,8 @@
     </div>
 </div>
 
-<!-- JavaScript for User Actions -->
+
 <script>
-// Console log to confirm script is loaded
 console.log('User management script loaded');
 
 function toggleUserRole(userId, currentRole) {
@@ -222,13 +230,11 @@ function toggleUserRole(userId, currentRole) {
     const action = newRole === 'admin' ? 'make this user an admin' : 'remove admin privileges';
     
     if (confirm(`Are you sure you want to ${action}?`)) {
-        // Show loading state on the button
         const roleButton = event.target.closest('button');
         const originalContent = roleButton.innerHTML;
         roleButton.innerHTML = '<i class="ri-loader-4-line mr-1 animate-spin"></i>Processing...';
         roleButton.disabled = true;
         
-        // Make AJAX call to update user role
         fetch(`/users/${userId}/toggle-role`, {
             method: 'POST',
             headers: {
@@ -245,30 +251,24 @@ function toggleUserRole(userId, currentRole) {
         })
         .then(data => {
             if (data.success) {
-                // Show success toast
                 showToast(data.message, 'success');
                 
-                // Update the UI immediately
                 const roleBadge = document.querySelector(`[data-user-id="${userId}"] .role-badge`);
                 
                 if (data.new_role === 'admin') {
-                    // Update button to "Remove Admin"
                     roleButton.className = 'inline-flex items-center px-3 py-1.5 bg-red-100 text-red-700 hover:bg-red-200 text-xs font-medium rounded-lg transition-colors duration-150';
                     roleButton.innerHTML = '<i class="ri-user-line mr-1"></i>Remove Admin';
                     roleButton.setAttribute('onclick', `toggleUserRole(${userId}, 'admin')`);
                     
-                    // Update role badge
                     if (roleBadge) {
                         roleBadge.className = 'role-badge inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800';
                         roleBadge.innerHTML = '<i class="ri-admin-line mr-1"></i>Admin';
                     }
                 } else {
-                    // Update button to "Make Admin"
                     roleButton.className = 'inline-flex items-center px-3 py-1.5 bg-purple-100 text-purple-700 hover:bg-purple-200 text-xs font-medium rounded-lg transition-colors duration-150';
                     roleButton.innerHTML = '<i class="ri-admin-line mr-1"></i>Make Admin';
                     roleButton.setAttribute('onclick', `toggleUserRole(${userId}, 'user')`);
                     
-                    // Update role badge
                     if (roleBadge) {
                         roleBadge.className = 'role-badge inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800';
                         roleBadge.innerHTML = '<i class="ri-user-line mr-1"></i>User';
@@ -277,7 +277,6 @@ function toggleUserRole(userId, currentRole) {
                 roleButton.disabled = false;
             } else {
                 showToast(data.error || 'An error occurred while updating the user role.', 'error');
-                // Restore button state
                 roleButton.innerHTML = originalContent;
                 roleButton.disabled = false;
             }
@@ -285,11 +284,9 @@ function toggleUserRole(userId, currentRole) {
         .catch(error => {
             console.error('Error:', error);
             showToast('An error occurred while updating the user role. Check console for details.', 'error');
-            // Restore button state on error
             roleButton.innerHTML = originalContent;
             roleButton.disabled = false;
             
-            // Fallback: show more detailed error info
             if (confirm('AJAX failed. Would you like to try a page refresh instead?')) {
                 window.location.reload();
             }
@@ -298,29 +295,24 @@ function toggleUserRole(userId, currentRole) {
 }
 
 function viewUserDetails(userId) {
-    // Redirect to user details page
     window.location.href = `/users/${userId}`;
 }
 
 function editUser(userId) {
-    // Redirect to edit user page
     window.location.href = `/users/${userId}/edit`;
 }
 
 function deleteUser(userId) {
     console.log('deleteUser called:', { userId });
-    // Get user name for better confirmation message
     const userRow = document.querySelector(`[data-user-id="${userId}"]`);
     const userName = userRow ? userRow.querySelector('.user-name')?.textContent || 'this user' : 'this user';
     
     if (confirm(`Are you sure you want to delete ${userName}? This action cannot be undone.`)) {
-        // Show loading state on the delete button
         const deleteButton = event.target.closest('button');
         const originalContent = deleteButton.innerHTML;
         deleteButton.innerHTML = '<i class="ri-loader-4-line mr-1 animate-spin"></i>Deleting...';
         deleteButton.disabled = true;
         
-        // Make AJAX request for DELETE
         fetch(`/users/${userId}`, {
             method: 'DELETE',
             headers: {
@@ -338,18 +330,15 @@ function deleteUser(userId) {
         .then(data => {
             if (data.success) {
                 showToast(data.message || 'User deleted successfully.', 'success');
-                // Remove the table row with animation
                 if (userRow) {
                     userRow.style.transition = 'all 0.3s ease';
                     userRow.style.opacity = '0';
                     userRow.style.transform = 'translateX(-100%)';
                     setTimeout(() => userRow.remove(), 300);
                 }
-                // Update user count
                 updateUserCount();
             } else {
                 showToast(data.error || 'Failed to delete user.', 'error');
-                // Restore button state
                 deleteButton.innerHTML = originalContent;
                 deleteButton.disabled = false;
             }
@@ -357,11 +346,9 @@ function deleteUser(userId) {
         .catch(error => {
             console.error('Error:', error);
             showToast('An error occurred while deleting the user. Check console for details.', 'error');
-            // Restore button state on error
             deleteButton.innerHTML = originalContent;
             deleteButton.disabled = false;
             
-            // Fallback: show more detailed error info
             if (confirm('AJAX failed. Would you like to try a page refresh instead?')) {
                 window.location.reload();
             }
@@ -369,9 +356,7 @@ function deleteUser(userId) {
     }
 }
 
-// Toast notification function
 function showToast(message, type = 'success') {
-    // Create toast container if it doesn't exist
     let toastContainer = document.getElementById('toast-container');
     if (!toastContainer) {
         toastContainer = document.createElement('div');
@@ -380,7 +365,6 @@ function showToast(message, type = 'success') {
         document.body.appendChild(toastContainer);
     }
     
-    // Create toast element
     const toast = document.createElement('div');
     const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
     const icon = type === 'success' ? 'ri-check-circle-line' : 'ri-error-warning-line';
@@ -396,12 +380,10 @@ function showToast(message, type = 'success') {
     
     toastContainer.appendChild(toast);
     
-    // Animate in
     setTimeout(() => {
         toast.classList.remove('translate-x-full');
     }, 100);
     
-    // Auto remove after 5 seconds
     setTimeout(() => {
         if (toast.parentElement) {
             toast.classList.add('translate-x-full');
@@ -410,7 +392,6 @@ function showToast(message, type = 'success') {
     }, 5000);
 }
 
-// Helper function to update user count
 function updateUserCount() {
     const userCountElements = document.querySelectorAll('[data-user-count]');
     userCountElements.forEach(element => {

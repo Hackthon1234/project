@@ -1,3 +1,12 @@
+{{--
+    =====================================================
+    VybeCart - Edit Profile Page
+    =====================================================
+    Description: User profile management with update and delete account options
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}}
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">

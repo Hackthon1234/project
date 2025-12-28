@@ -1,3 +1,12 @@
+{{--
+    =====================================================
+    VybeCart - Create Product
+    =====================================================
+    Description: Comprehensive form to add new products with images and details
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}}
 @extends('layouts.app')
 @section('title', 'Create Products')
 @section('content')
@@ -5,7 +14,7 @@
         <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data"
             class="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
 
-            <!-- Header -->
+            
             <div class="mb-8 text-center">
                 <div class="bg-blue-100 w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-4">
                     <i class="ri-shopping-bag-line text-2xl text-blue-600"></i>
@@ -16,7 +25,7 @@
 
             @csrf
 
-            <!-- Image Upload Field -->
+            
             <div class="mb-6">
                 <label for="image" class="block text-sm font-medium text-gray-700 mb-2">
                     <i class="ri-image-line mr-2 text-blue-500"></i> Product Image
@@ -43,7 +52,7 @@
                 @enderror
             </div>
 
-            <!-- Name Field -->
+            
             <div class="mb-6">
                 <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
                     <i class="ri-shopping-bag-line mr-2 text-blue-500"></i> Product Name
@@ -59,7 +68,7 @@
                 @enderror
             </div>
 
-            <!-- Description Field -->
+            
             <div class="mb-6">
                 <label for="description" class="block text-sm font-medium text-gray-700 mb-2">
                     <i class="ri-text-wrap mr-2 text-blue-500"></i> Description
@@ -74,7 +83,7 @@
                 @enderror
             </div>
 
-            <!-- Price Fields -->
+            
             <div class="grid grid-cols-2 gap-6 mb-6">
                 <div>
                     <label for="price" class="block text-sm font-medium text-gray-700 mb-2">
@@ -104,7 +113,7 @@
                 </div>
             </div>
 
-            <!-- Stock Field -->
+            
             <div class="mb-6">
                 <label for="stock" class="block text-sm font-medium text-gray-700 mb-2">
                     <i class="ri-stack-line mr-2 text-blue-500"></i> Stock Quantity
@@ -119,7 +128,7 @@
                 @enderror
             </div>
 
-            <!-- Category Field -->
+            
             <div class="mb-8 relative">
                 <label for="category" class="block text-sm font-medium text-gray-700 mb-2">
                     <i class="ri-folder-line mr-2 text-blue-500"></i> Category
@@ -148,7 +157,7 @@
                 </div>
             </div>
 
-            <!-- Form Actions -->
+            
             <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200">
                 <a href="{{ route('products.index') }}"
                     class="px-5 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-200">

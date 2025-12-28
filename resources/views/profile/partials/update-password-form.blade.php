@@ -1,3 +1,12 @@
+{{--
+    =====================================================
+    VybeCart - Update Password Form
+    =====================================================
+    Description: Form section for changing user password
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}}
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">

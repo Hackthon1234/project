@@ -1,3 +1,12 @@
+{{--
+    =====================================================
+    VybeCart - Navigation Link Component
+    =====================================================
+    Description: Active state navigation link for admin panel
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}}
 @props(['active'])
 
 @php

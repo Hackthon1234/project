@@ -1,9 +1,17 @@
+{{--
+    =====================================================
+    VybeCart - View User Details
+    =====================================================
+    Description: Display complete user profile and activity information
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}}
 @extends('layouts.app')
 @section('title', 'User Details')
 @section('content')
 
 <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 mb-6">
-    <!-- Header -->
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-semibold text-gray-800 tracking-tight">User Details</h2>
         <div class="flex gap-3">
@@ -18,12 +26,9 @@
         </div>
     </div>
 
-    <!-- Optional Divider -->
     <div class="border-t border-gray-100 my-4"></div>
 
-    <!-- User Profile Section -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- User Avatar and Basic Info -->
         <div class="lg:col-span-1">
             <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-8 text-center border border-indigo-200">
                 <div class="w-32 h-32 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -32,7 +37,6 @@
                 <h3 class="text-2xl font-bold text-gray-900 mb-2">{{ $user->name }}</h3>
                 <p class="text-gray-600 mb-4">{{ $user->email }}</p>
                 
-                <!-- Role Badge -->
                 <div class="flex justify-center mb-4">
                     <span class="px-4 py-2 text-sm rounded-full font-medium
                         @if($user->role == 'admin') bg-purple-100 text-purple-800
@@ -42,7 +46,6 @@
                     </span>
                 </div>
                 
-                <!-- Status Badge -->
                 <div class="flex justify-center">
                     <span class="px-4 py-2 text-sm rounded-full font-medium
                         @if($user->email_verified_at) bg-green-100 text-green-800
@@ -58,10 +61,8 @@
             </div>
         </div>
 
-        <!-- User Details -->
         <div class="lg:col-span-2">
             <div class="space-y-6">
-                <!-- Account Information -->
                 <div class="bg-gray-50 rounded-xl p-6">
                     <h4 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                         <i class="ri-information-line text-indigo-600 mr-2"></i>
@@ -87,7 +88,6 @@
                     </div>
                 </div>
 
-                <!-- Account Status -->
                 <div class="bg-gray-50 rounded-xl p-6">
                     <h4 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                         <i class="ri-shield-check-line text-green-600 mr-2"></i>
@@ -129,7 +129,6 @@
                     </div>
                 </div>
 
-                <!-- Registration Details -->
                 <div class="bg-gray-50 rounded-xl p-6">
                     <h4 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                         <i class="ri-calendar-line text-blue-600 mr-2"></i>
@@ -149,7 +148,6 @@
                     </div>
                 </div>
 
-                <!-- User Statistics (if you have orders or other data) -->
                 @php
                     $userOrders = $user->orders ?? collect();
                     $userCarts = $user->carts ?? collect();
@@ -179,7 +177,6 @@
         </div>
     </div>
 
-    <!-- Action Buttons -->
     <div class="mt-8 flex justify-end gap-4">
         @if($user->id !== auth()->id())
             <button onclick="deleteUser({{ $user->id }})" class="inline-flex items-center px-6 py-3 bg-red-100 text-red-700 rounded-xl hover:bg-red-200 transition duration-200">
@@ -197,22 +194,18 @@
     </div>
 </div>
 
-<!-- JavaScript for User Actions -->
 <script>
 function toggleUserRole(userId, currentRole) {
     const newRole = currentRole === 'admin' ? 'user' : 'admin';
     const action = newRole === 'admin' ? 'make this user an admin' : 'remove admin privileges';
     
     if (confirm(`Are you sure you want to ${action}?`)) {
-        // Here you would make an AJAX call to update the user role
-        // For now, we'll just show an alert
         alert('User role update functionality needs to be implemented in the backend.');
     }
 }
 
 function deleteUser(userId) {
     if (confirm('Are you sure you want to delete this user? This action cannot be undone.')) {
-        // Redirect to delete route
         window.location.href = `/users/${userId}/delete`;
     }
 }

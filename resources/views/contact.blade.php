@@ -1,9 +1,26 @@
+{--
+    =====================================================
+    VybeCart - Contact Us
+    =====================================================
+    Description: Contact form and customer support information
+    Author: VybeCart Team
+    Last Modified: 2025-12-28
+    =====================================================
+--}
+{{--
+    =====================================================
+    VybeCart - Contact Us
+    =====================================================
+    Description: Contact form and support information
+    Features: Contact form, location, support details
+    Author: VybeCart Team
+    =====================================================
+--}}
+
 @extends('layouts.master')
 @section('title', 'Contact Us')
 @section('content')
-    <!-- Enhanced Hero Section -->
     <div class="relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-700 to-purple-800 text-white py-32">
-        <!-- Background Decorations -->
         <div class="absolute -top-20 -right-20 w-96 h-96 bg-gradient-to-br from-white/10 to-white/5 rounded-full mix-blend-overlay filter blur-3xl"></div>
         <div class="absolute -bottom-20 -left-20 w-96 h-96 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full mix-blend-overlay filter blur-3xl"></div>
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full">
@@ -23,7 +40,6 @@
                     We'd love to hear from you. Send us a message and we'll respond as soon as possible.
                 </p>
                 
-                <!-- Quick Contact Stats -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-16" data-aos="fade-up" data-aos-delay="200">
                     <div class="text-center">
                         <div class="text-4xl font-black text-yellow-300">24/7</div>
@@ -42,15 +58,12 @@
         </div>
     </div>
     
-    <!-- Enhanced Contact Form & Info Section -->
     <div class="relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-primary-50/30 py-32">
-        <!-- Background Decorations -->
         <div class="absolute top-20 right-20 w-64 h-64 bg-gradient-to-br from-primary-100 to-primary-200 rounded-full mix-blend-multiply filter blur-3xl opacity-60"></div>
         <div class="absolute bottom-20 left-20 w-64 h-64 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full mix-blend-multiply filter blur-3xl opacity-60"></div>
         
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-16">
-                <!-- Enhanced Contact Form -->
                 <div data-aos="fade-right" data-aos-duration="800">
                     <div class="inline-flex items-center px-4 py-2 rounded-full bg-primary-50 border border-primary-200 text-primary-700 text-sm font-semibold mb-6">
                         <i class="ri-message-3-line mr-2"></i>
@@ -103,7 +116,6 @@
                     </form>
                 </div>
                 
-                <!-- Enhanced Contact Information -->
                 <div class="lg:pl-8" data-aos="fade-left" data-aos-duration="800">
                     <div class="inline-flex items-center px-4 py-2 rounded-full bg-primary-50 border border-primary-200 text-primary-700 text-sm font-semibold mb-6">
                         <i class="ri-information-line mr-2"></i>
@@ -113,9 +125,7 @@
                         Other Ways to <span class="text-gradient">Reach Us</span>
                     </h2>
                     
-                    <!-- Contact Cards -->
                     <div class="space-y-6 mb-12">
-                        <!-- Location -->
                         <div class="card-stack bg-white rounded-3xl shadow-lg p-8 transform hover:shadow-2xl hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
                             <div class="flex items-start">
                                 <div class="w-16 h-16 bg-gradient-to-br from-primary-400 to-primary-600 rounded-2xl flex items-center justify-center text-white mr-6 flex-shrink-0">
@@ -128,7 +138,6 @@
                             </div>
                         </div>
                         
-                        <!-- Phone -->
                         <div class="card-stack bg-white rounded-3xl shadow-lg p-8 transform hover:shadow-2xl hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
                             <div class="flex items-start">
                                 <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center text-white mr-6 flex-shrink-0">
@@ -144,7 +153,6 @@
                             </div>
                         </div>
                         
-                        <!-- Email -->
                         <div class="card-stack bg-white rounded-3xl shadow-lg p-8 transform hover:shadow-2xl hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
                             <div class="flex items-start">
                                 <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center text-white mr-6 flex-shrink-0">
@@ -160,7 +168,6 @@
                             </div>
                         </div>
                         
-                        <!-- Business Hours -->
                         <div class="card-stack bg-white rounded-3xl shadow-lg p-8 transform hover:shadow-2xl hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-delay="400">
                             <div class="flex items-start">
                                 <div class="w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center text-white mr-6 flex-shrink-0">
@@ -178,7 +185,6 @@
                         </div>
                     </div>
                     
-                    <!-- Social Media -->
                     <div class="bg-gradient-to-r from-primary-50 to-purple-50 rounded-3xl p-8 border border-primary-100" data-aos="fade-up" data-aos-delay="500">
                         <h4 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
                             <i class="ri-share-line text-primary-500 mr-3"></i>
@@ -205,7 +211,7 @@
         </div>
     </div>
     
-    <!-- FAQ Section -->
+    
     <div class="relative py-32 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-20" data-aos="fade-up">
